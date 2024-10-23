@@ -4,6 +4,7 @@ Ovaj skup podataka popisuje neke od najpopularnijih video igri koje su objavljen
 Skup podataka, te formati zapisa u kojima se može preuzeti, u trenutnoj inačici nije potpun. Njegov rast i razvoj može se očekivati kroz nadolazeće inačice.
 
 # Opis skupa podataka
+
 | Naziv                      | Video igre                                                          |
 |----------------------------|---------------------------------------------------------------------|
 | URI                        | https://github.com/Jurica-Laljak/Video-igre                         |
@@ -19,6 +20,33 @@ Skup podataka, te formati zapisa u kojima se može preuzeti, u trenutnoj inačic
 | Licencija                  | GNU General Public License v3.0                                     |
 
 # Shema skupa podataka
+
+### Shema relacije "igra"
+
+| **Naziv atributa**    |                                                                           **Opis atributa**                                                                          |
+|-----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| id                    | Jedinstveni identfikator video igre u bazi podataka.                                                                                                                 |
+| naziv                 | Službeni naziv pod kojime je igra objavljena.                                                                                                                        |
+| datum_izdavanja       | Datum kada je igra međunarodno izdana.                                                                                                                               |
+| platforme             | **Popis** platformi na kojima je igra izdana. Platforme su Windows/Mac/Linux, Android/iOS, PlayStation 5, Nintentdo Switch i Xbox Series X.                          |
+| razvojni_tim          | Naziv razvojnog tima koji je razvio igru.                                                                                                                            |
+| izdavac               | Naziv izdavača koji je igru izdao.                                                                                                                                   |
+| zanr                  | Naziv žanra kojem igra pripada. Popularni primjeri žanrova su RPG, FPS, Strategy, Adventure, Sports, Casual, Action, itd.                                            |
+| cijena                | Izvorna cijena videoigre. Izražena u američkim dollarima (USD).                                                                                                      |
+| osvojene_nagrade      | **Popis** nagradi koje je navedena video igra osvojila. Može biti prazan.                                                                                            |
+| podrzava_singleplayer | Logička vrijednost koja opisuje podržava li igra samostalnu igru.                                                                                                    |
+| podrzava_multiplayer  | Logička vrijednost koja opisuje omogućuje li igra višekorisničku igru.                                                                                               |
+| dlc                   | **Popis** svih plaćenih proširenja (eng. "downloadable content", "DLC") koji su izdani za igru u 2023. godini. Svaki DLC objekt sadrži atribute prema idućoj shemi.  |
+
+### Shema relacije "dlc"
+
+| **Naziv atributa**  |                      **Opis atributa**                      |
+|---------------------|:-----------------------------------------------------------:|
+| id_dlc              | Jedinstveni identfikator dlc-a u bazi podataka.             |
+| naziv_dlc           | Službeni naziv pod kojime je dlc objavljen.                 |
+| datum_izdavanja_dlc | Datum kada je dlc međunarodno izdan.                        |
+| cijena_dlc          | Izvorna cijena dlc-a. Izražena u američkim dollarima (USD). |
+| id                  | Identifikator video igre koju dlc proširuje.                |
 
 # Poveznice na slične skupove podataka
 
