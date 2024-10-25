@@ -5,8 +5,8 @@ Skup podataka, te formati zapisa u kojima se može preuzeti, u trenutnoj inačic
 
 # Opis skupa podataka
 
-| Naziv                      | Video igre                                                          |
 |----------------------------|---------------------------------------------------------------------|
+| Naziv                      | Video igre                                                          |
 | URI                        | https://github.com/Jurica-Laljak/Video-igre                         |
 | Najnovija verzija          | 1.0                                                                 |
 | Datum objave               |                                                                     |
