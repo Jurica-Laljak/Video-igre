@@ -5,17 +5,17 @@ Skup podataka, te formati zapisa u kojima se može preuzeti, u trenutnoj inačic
 
 # Opis skupa podataka
 
+| Podatak                    | Opis                                                                |
 |----------------------------|---------------------------------------------------------------------|
 | Naziv                      | Video igre                                                          |
 | URI                        | https://github.com/Jurica-Laljak/Video-igre                         |
 | Najnovija verzija          | 1.0                                                                 |
-| Datum objave               |                                                                     |
-| Ključne riječi             | video igre, igre, računalne igre, otvoreno                          |
-| Jezik                      | Hrvatski jezik                                                      |
+| Datum objave               | 2023-10-28                                                          |
+| Ključne riječi             | video games, games, pc games, open                                  |
+| Jezik                      | english                                                             |
 | Vremenski opseg podataka   | 2023. godina                                                        |
 | Standard datuma i vremena  | [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)  |
 | Dostupni formati           | CSV, JSON                                                           |
-|                            |                                                                     |
 | Autor                      | [Jurica Laljak](https://github.com/Jurica-Laljak)                   |
 | Licencija                  | GNU General Public License v3.0                                     |
 
