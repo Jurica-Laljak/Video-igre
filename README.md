@@ -1,5 +1,4 @@
-Video igre svake godine postaju sve unosnija industrija. 2023. godine, preko 3 miljarde ljudi u cijelom svijetu igralo je video igre, te tržište video igara 2023. godine imalo je [procijenjenu vrijednost od 282 miljardi dollara](https://explodingtopics.com/blog/number-of-gamers). 
-Ovaj skup podataka popisuje neke od najpopularnijih video igri koje su objavljene 2023. godine. Skup podataka u velikoj mjeri obuhvaća multiplatformske video igre, no sadrži i nekoliko primjera popularnih video igara eksluzivnih za određenu konzolu. Dodatan naglasak stavljen je na igre koje su osvojile nagradu ili su bile nominirane na dodjeli nagrada [The Game Awards 2023](https://en.wikipedia.org/wiki/The_Game_Awards_2023). 
+Video igre svake godine postaju sve unosnija industrija. 2023. godine, preko 3 miljarde ljudi u cijelom svijetu igralo je video igre, te tržište video igara 2023. godine imalo je [procijenjenu vrijednost od 282 miljardi dollara](https://explodingtopics.com/blog/number-of-gamers). Za ovako širok skup korisnika potreban je jednostavan način praćenja najnovijih video igri. Ovaj skup podataka nastoji katalogizirati mali broj najpopularnijih video igara nastalih u 2023. godini. Skup podataka u velikoj mjeri obuhvaća multiplatformske video igre, no sadrži i nekoliko primjera popularnih video igara eksluzivnih za određenu konzolu. Dodatan naglasak stavljen je na igre koje su osvojile neku nagradu ili su bile nominirane na dodjeli nagrada [The Game Awards 2023](https://en.wikipedia.org/wiki/The_Game_Awards_2023). 
 
 Skup podataka, te formati zapisa u kojima se može preuzeti, u trenutnoj inačici nije potpun. Njegov rast i razvoj može se očekivati kroz nadolazeće inačice.
 
@@ -10,7 +9,7 @@ Skup podataka, te formati zapisa u kojima se može preuzeti, u trenutnoj inačic
 | Naziv                      | Video igre                                                          |
 | URI                        | https://github.com/Jurica-Laljak/Video-igre                         |
 | Najnovija verzija          | 1.0                                                                 |
-| Datum objave               | 2023-10-28                                                          |
+| Datum objave               | 2023-10-27                                                          |
 | Ključne riječi             | video games, games, pc games, open                                  |
 | Jezik                      | english                                                             |
 | Vremenski opseg podataka   | 2023. godina                                                        |
@@ -21,31 +20,31 @@ Skup podataka, te formati zapisa u kojima se može preuzeti, u trenutnoj inačic
 
 # Shema skupa podataka
 
-### Shema relacije "igra"
+### Shema relacije GAME
 
 | **Naziv atributa**    |                                                                           **Opis atributa**                                                                          |
 |-----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| id                    | Jedinstveni identfikator video igre u bazi podataka.                                                                                                                 |
-| naziv                 | Službeni naziv pod kojime je igra objavljena.                                                                                                                        |
-| datum_izdavanja       | Datum kada je igra međunarodno izdana.                                                                                                                               |
-| platforme             | **Popis** platformi na kojima je igra izdana. Platforme su Windows/Mac/Linux, Android/iOS, PlayStation 5, Nintentdo Switch i Xbox Series X.                          |
-| razvojni_tim          | Naziv razvojnog tima koji je razvio igru.                                                                                                                            |
-| izdavac               | Naziv izdavača koji je igru izdao.                                                                                                                                   |
-| zanr                  | Naziv žanra kojem igra pripada. Popularni primjeri žanrova su RPG, FPS, Strategy, Adventure, Sports, Casual, Action, itd.                                            |
-| cijena                | Izvorna cijena videoigre. Izražena u američkim dollarima (USD).                                                                                                      |
-| osvojene_nagrade      | **Popis** nagradi koje je navedena video igra osvojila. Može biti prazan.                                                                                            |
-| podrzava_singleplayer | Logička vrijednost koja opisuje podržava li igra samostalnu igru.                                                                                                    |
-| podrzava_multiplayer  | Logička vrijednost koja opisuje omogućuje li igra višekorisničku igru.                                                                                               |
-| dlc                   | **Popis** svih plaćenih proširenja (eng. "downloadable content", "DLC") koji su izdani za igru u 2023. godini. Svaki DLC objekt sadrži atribute prema idućoj shemi.  |
+| **id**                | Interni atribut unutar baze podataka. Primarni ključ relacije GAME.                                                                                                  |
+| name                  | Službeni naziv pod kojime je igra objavljena.                                                                                                                        |
+| release_date          | Datum kada je igra međunarodno izdana.                                                                                                                               |
+| developer             | Naziv razvojnog tima koji je razvio igru.                                                                                                                            |
+| publisher             | Naziv izdavača koji je igru izdao.                                                                                                                                   |
+| platforms             | **Popis** platformi na kojima je igra izdana. Platforme uključuju PC, PlayStation 5, Xbox Series X, Nintendo Switch, Mobile                                          |
+| genre                 | Naziv žanra kojem igra pripada. Popularni primjeri žanrova su RPG, FPS, Strategy, Adventure, Sports, Casual, Action, itd.                                            |
+| price                 | Izvorna cijena videoigre. Izražena u američkim dollarima (USD).                                                                                                      |
+| metascore             | Ocjena na stranici [Metacritic](https://www.metacritic.com/). Ocjena je izračunata agregiranjem recenzija časopisa i korisnika.                                      |            
+| has_singleplayer      | Logička vrijednost koja opisuje podržava li igra samostalnu igru.                                                                                                    |
+| has_multiplayer       | Logička vrijednost koja opisuje omogućuje li igra višekorisničku igru.                                                                                               |
+| dlc                   | **Popis** svih plaćenih proširenja (eng. "downloadable content", "DLC") koji su izdani za igru u 2023. godini. Svaki DLC objekt sadrži atribute prema shemi DLC.     |
 
-### Shema relacije "dlc"
+### Shema relacije DLC
 
 | **Naziv atributa**  |                      **Opis atributa**                      |
 |---------------------|:-----------------------------------------------------------:|
-| id_dlc              | Jedinstveni identfikator dlc-a u bazi podataka.             |
-| naziv_dlc           | Službeni naziv pod kojime je dlc objavljen.                 |
-| datum_izdavanja_dlc | Datum kada je dlc međunarodno izdan.                        |
-| cijena_dlc          | Izvorna cijena dlc-a. Izražena u američkim dollarima (USD). |
+| **id_dlc**          | Primarni ključ relacije DLC.                                |
+| name_dlc            | Službeni naziv pod kojime je dlc objavljen.                 |
+| release_date_dlc    | Datum kada je dlc međunarodno izdan.                        |
+| price_dlc           | Izvorna cijena dlc-a. Izražena u američkim dollarima (USD). |
 | id                  | Identifikator video igre koju dlc proširuje.                |
 
 # Poveznice na slične skupove podataka
