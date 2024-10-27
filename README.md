@@ -43,10 +43,10 @@ Skup podataka, te formati zapisa u kojima se može preuzeti, u trenutnoj inačic
 
 ### Shema relacije PLATFORMS
 
-| Naziv atributa | Opis atributa                                                  |
-|----------------|----------------------------------------------------------------|
-| **id**         | Primarni ključ relacije PLATFORMS                              |
-| platform       | Ime platforme na kojoj je video igra izdana.                   |
+| Naziv atributa |                          Opis atributa                         |
+|:--------------:|:--------------------------------------------------------------:|
+| **id**         |                Primarni ključ relacije PLATFORMS               |
+| platform       |          Ime platforme na kojoj je video igra izdana.          |
 | id_game        | Identifikator video igre čije izdanje se nalazi na platformi.  |
 
 
