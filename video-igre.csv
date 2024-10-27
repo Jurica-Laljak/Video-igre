@@ -1,0 +1,53 @@
+name,release_date,developer,publisher,platform,genre,price,metascore,has_singleplayer,has_multiplayer,dlc_name,dlc_release_date,dlc_price
+Baldur's Gate,2023-08-03,Larian Studios,Larian Studios,PC,RPG,59.99,96,True,True,Digital Deluxe Edition,2023-08-03,9.75
+Baldur's Gate,2023-08-03,Larian Studios,Larian Studios,PlayStation 5,RPG,59.99,96,True,True,Digital Deluxe Edition,2023-08-03,9.75
+Baldur's Gate,2023-08-03,Larian Studios,Larian Studios,Xbox Series X,RPG,59.99,96,True,True,Digital Deluxe Edition,2023-08-03,9.75
+Pizza Tower,2023-01-26,Tour De Pizza,Tour De Pizza,PC,Platformer,19.5,89,True,False,Original Soundtrack,2023-02-01,9.75
+Pizza Tower,2023-01-26,Tour De Pizza,Tour De Pizza,Nintendo Switch,Platformer,19.5,89,True,False,Original Soundtrack,2023-02-01,9.75
+Resident Evil 4,2023-03-24,"Capcom Co., Ltd.","Capcom Co., Ltd.",PC,Horror,39.99,93,True,False,Original Soundtrack,2023-09-21,24.99
+Resident Evil 4,2023-03-24,"Capcom Co., Ltd.","Capcom Co., Ltd.",PC,Horror,39.99,93,True,False,Separate Ways,2023-09-21,9.99
+Resident Evil 4,2023-03-24,"Capcom Co., Ltd.","Capcom Co., Ltd.",PC,Horror,39.99,93,True,False,The Mercenaries,2023-04-07,0
+Resident Evil 4,2023-03-24,"Capcom Co., Ltd.","Capcom Co., Ltd.",PlayStation 5,Horror,39.99,93,True,False,Original Soundtrack,2023-09-21,24.99
+Resident Evil 4,2023-03-24,"Capcom Co., Ltd.","Capcom Co., Ltd.",PlayStation 5,Horror,39.99,93,True,False,Separate Ways,2023-09-21,9.99
+Resident Evil 4,2023-03-24,"Capcom Co., Ltd.","Capcom Co., Ltd.",PlayStation 5,Horror,39.99,93,True,False,The Mercenaries,2023-04-07,0
+Resident Evil 4,2023-03-24,"Capcom Co., Ltd.","Capcom Co., Ltd.",Xbox Series X,Horror,39.99,93,True,False,Original Soundtrack,2023-09-21,24.99
+Resident Evil 4,2023-03-24,"Capcom Co., Ltd.","Capcom Co., Ltd.",Xbox Series X,Horror,39.99,93,True,False,Separate Ways,2023-09-21,9.99
+Resident Evil 4,2023-03-24,"Capcom Co., Ltd.","Capcom Co., Ltd.",Xbox Series X,Horror,39.99,93,True,False,The Mercenaries,2023-04-07,0
+Honkai: Star Rail,2023-04-26,miHoyo,HoYoverse,PC,RPG,0,80,True,False,,,
+Honkai: Star Rail,2023-04-26,miHoyo,HoYoverse,PlayStation 5,RPG,0,80,True,False,,,
+Honkai: Star Rail,2023-04-26,miHoyo,HoYoverse,Mobile,RPG,0,80,True,False,,,
+Turbo Overkill,2023-08-11,Trigger Happy Interactive,Apogee Entertainment,PC,FPS,24.5,87,True,False,Original Soundtrack,2023-08-18,9.75
+The Legend of Zelda: Tears of the Kingdom,2023-05-12,Nintendo EDP,Nintendo,Nintendo Switch,Adventure,69.99,96,True,False,,,
+ARMORED CORE VI FIRES OF RUBICON,2023-08-25,"FromSoftware, Inc.","FromSoftware, Inc.",PC,Action,59.99,86,True,False,,,
+ARMORED CORE VI FIRES OF RUBICON,2023-08-25,"FromSoftware, Inc.","FromSoftware, Inc.",PlayStation 5,Action,59.99,86,True,False,,,
+ARMORED CORE VI FIRES OF RUBICON,2023-08-25,"FromSoftware, Inc.","FromSoftware, Inc.",Xbox Series X,Action,59.99,86,True,False,,,
+DREDGE,2023-03-30,Black Salt Games,Team17,PC,Adventure,24.99,80,True,False,The Pale Reach,2023-11-16,5.99
+DREDGE,2023-03-30,Black Salt Games,Team17,PC,Adventure,24.99,80,True,False,Blackstone Key,2023-03-30,4.99
+DREDGE,2023-03-30,Black Salt Games,Team17,PlayStation 5,Adventure,24.99,80,True,False,The Pale Reach,2023-11-16,5.99
+DREDGE,2023-03-30,Black Salt Games,Team17,PlayStation 5,Adventure,24.99,80,True,False,Blackstone Key,2023-03-30,4.99
+DREDGE,2023-03-30,Black Salt Games,Team17,Xbox Series X,Adventure,24.99,80,True,False,The Pale Reach,2023-11-16,5.99
+DREDGE,2023-03-30,Black Salt Games,Team17,Xbox Series X,Adventure,24.99,80,True,False,Blackstone Key,2023-03-30,4.99
+DREDGE,2023-03-30,Black Salt Games,Team17,Nintendo Switch,Adventure,24.99,80,True,False,The Pale Reach,2023-11-16,5.99
+DREDGE,2023-03-30,Black Salt Games,Team17,Nintendo Switch,Adventure,24.99,80,True,False,Blackstone Key,2023-03-30,4.99
+DREDGE,2023-03-30,Black Salt Games,Team17,Mobile,Adventure,24.99,80,True,False,The Pale Reach,2023-11-16,5.99
+DREDGE,2023-03-30,Black Salt Games,Team17,Mobile,Adventure,24.99,80,True,False,Blackstone Key,2023-03-30,4.99
+Cities: Skylines II,2023-10-24,Colossal Order Ltd.,Paradox Interactive,PC,City Builder,49.99,74,True,False,,,
+Barotrauma,2023-03-13,FakeFish,Daedalic Entertainment,PC,Horror,24.99,81,True,True,,,
+Diablo IV,2023-10-17,"Blizzard Etertainment, Inc.","Blizzard Etertainment, Inc.",PC,RPG,49.99,86,True,True,Original Soundtrack,2023-10-17,10.99
+Diablo IV,2023-10-17,"Blizzard Etertainment, Inc.","Blizzard Etertainment, Inc.",PlayStation 5,RPG,49.99,86,True,True,Original Soundtrack,2023-10-17,10.99
+Diablo IV,2023-10-17,"Blizzard Etertainment, Inc.","Blizzard Etertainment, Inc.",Xbox Series X,RPG,49.99,86,True,True,Original Soundtrack,2023-10-17,10.99
+The Talos Principle 2,2023-11-02,Croteam,Devolver Digital,PC,Puzzle,28.99,88,True,False,Original Soundtrack,2023-12-21,9.75
+The Talos Principle 2,2023-11-02,Croteam,Devolver Digital,PC,Puzzle,28.99,88,True,False,Digital Artbook,2023-11-02,4.99
+The Talos Principle 2,2023-11-02,Croteam,Devolver Digital,PlayStation 5,Puzzle,28.99,88,True,False,Original Soundtrack,2023-12-21,9.75
+The Talos Principle 2,2023-11-02,Croteam,Devolver Digital,PlayStation 5,Puzzle,28.99,88,True,False,Digital Artbook,2023-11-02,4.99
+The Talos Principle 2,2023-11-02,Croteam,Devolver Digital,Xbox Series X,Puzzle,28.99,88,True,False,Original Soundtrack,2023-12-21,9.75
+The Talos Principle 2,2023-11-02,Croteam,Devolver Digital,Xbox Series X,Puzzle,28.99,88,True,False,Digital Artbook,2023-11-02,4.99
+Street Fighter 6,2023-06-01,"Capcom Co., Ltd.","Capcom Co., Ltd.",PC,Action,59.99,92,True,True,Original Soundtrack,2023-07-28,69.99
+Street Fighter 6,2023-06-01,"Capcom Co., Ltd.","Capcom Co., Ltd.",PC,Action,59.99,92,True,True,Year 1 Ultimate Pass,2023-06-01,49.99
+Street Fighter 6,2023-06-01,"Capcom Co., Ltd.","Capcom Co., Ltd.",PC,Action,59.99,92,True,True,Year 1 Character Pass,2023-06-01,29.99
+Street Fighter 6,2023-06-01,"Capcom Co., Ltd.","Capcom Co., Ltd.",PlayStation 5,Action,59.99,92,True,True,Original Soundtrack,2023-07-28,69.99
+Street Fighter 6,2023-06-01,"Capcom Co., Ltd.","Capcom Co., Ltd.",PlayStation 5,Action,59.99,92,True,True,Year 1 Ultimate Pass,2023-06-01,49.99
+Street Fighter 6,2023-06-01,"Capcom Co., Ltd.","Capcom Co., Ltd.",PlayStation 5,Action,59.99,92,True,True,Year 1 Character Pass,2023-06-01,29.99
+Street Fighter 6,2023-06-01,"Capcom Co., Ltd.","Capcom Co., Ltd.",Xbox Series X,Action,59.99,92,True,True,Original Soundtrack,2023-07-28,69.99
+Street Fighter 6,2023-06-01,"Capcom Co., Ltd.","Capcom Co., Ltd.",Xbox Series X,Action,59.99,92,True,True,Year 1 Ultimate Pass,2023-06-01,49.99
+Street Fighter 6,2023-06-01,"Capcom Co., Ltd.","Capcom Co., Ltd.",Xbox Series X,Action,59.99,92,True,True,Year 1 Character Pass,2023-06-01,29.99
