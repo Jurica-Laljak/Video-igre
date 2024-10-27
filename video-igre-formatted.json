@@ -1,0 +1,304 @@
+[
+   {
+      "name":"Baldur's Gate",
+      "release_date":"2023-08-03",
+      "developer":"Larian Studios",
+      "publisher":"Larian Studios",
+      "platforms":[
+         "PC",
+         "PlayStation 5",
+         "Xbox Series X"
+      ],
+      "genre":"RPG",
+      "price":59.99,
+      "metascore":96,
+      "has_singleplayer":"True",
+      "has_multiplayer":"True",
+      "dlcs":[
+         {
+            "name":"Digital Deluxe Edition",
+            "price":9.75,
+            "release_date":"2023-08-03"
+         }
+      ]
+   },
+   {
+      "name":"Pizza Tower",
+      "release_date":"2023-01-26",
+      "developer":"Tour De Pizza",
+      "publisher":"Tour De Pizza",
+      "platforms":[
+         "Nintendo Switch",
+         "PC"
+      ],
+      "genre":"Platformer",
+      "price":19.5,
+      "metascore":89,
+      "has_singleplayer":"True",
+      "has_multiplayer":"False",
+      "dlcs":[
+         {
+            "name":"Original Soundtrack",
+            "price":9.75,
+            "release_date":"2023-02-01"
+         }
+      ]
+   },
+   {
+      "name":"Resident Evil 4",
+      "release_date":"2023-03-24",
+      "developer":"Capcom Co., Ltd.",
+      "publisher":"Capcom Co., Ltd.",
+      "platforms":[
+         "PC",
+         "PlayStation 5",
+         "Xbox Series X"
+      ],
+      "genre":"Horror",
+      "price":39.99,
+      "metascore":93,
+      "has_singleplayer":"True",
+      "has_multiplayer":"False",
+      "dlcs":[
+         {
+            "name":"Original Soundtrack",
+            "price":24.99,
+            "release_date":"2023-09-21"
+         },
+         {
+            "name":"Separate Ways",
+            "price":9.99,
+            "release_date":"2023-09-21"
+         },
+         {
+            "name":"The Mercenaries",
+            "price":0,
+            "release_date":"2023-04-07"
+         }
+      ]
+   },
+   {
+      "name":"Honkai: Star Rail",
+      "release_date":"2023-04-26",
+      "developer":"miHoyo",
+      "publisher":"HoYoverse",
+      "platforms":[
+         "Mobile",
+         "PC",
+         "PlayStation 5"
+      ],
+      "genre":"RPG",
+      "price":0,
+      "metascore":80,
+      "has_singleplayer":"True",
+      "has_multiplayer":"False",
+      "dlcs":[
+         
+      ]
+   },
+   {
+      "name":"Turbo Overkill",
+      "release_date":"2023-08-11",
+      "developer":"Trigger Happy Interactive",
+      "publisher":"Apogee Entertainment",
+      "platforms":[
+         "PC"
+      ],
+      "genre":"FPS",
+      "price":24.5,
+      "metascore":87,
+      "has_singleplayer":"True",
+      "has_multiplayer":"False",
+      "dlcs":[
+         {
+            "name":"Original Soundtrack",
+            "price":9.75,
+            "release_date":"2023-08-18"
+         }
+      ]
+   },
+   {
+      "name":"The Legend of Zelda: Tears of the Kingdom",
+      "release_date":"2023-05-12",
+      "developer":"Nintendo EDP",
+      "publisher":"Nintendo",
+      "platforms":[
+         "Nintendo Switch"
+      ],
+      "genre":"Adventure",
+      "price":69.99,
+      "metascore":96,
+      "has_singleplayer":"True",
+      "has_multiplayer":"False",
+      "dlcs":[
+         
+      ]
+   },
+   {
+      "name":"ARMORED CORE VI FIRES OF RUBICON",
+      "release_date":"2023-08-25",
+      "developer":"FromSoftware, Inc.",
+      "publisher":"FromSoftware, Inc.",
+      "platforms":[
+         "PC",
+         "PlayStation 5",
+         "Xbox Series X"
+      ],
+      "genre":"Action",
+      "price":59.99,
+      "metascore":86,
+      "has_singleplayer":"True",
+      "has_multiplayer":"False",
+      "dlcs":[
+         
+      ]
+   },
+   {
+      "name":"DREDGE",
+      "release_date":"2023-03-30",
+      "developer":"Black Salt Games",
+      "publisher":"Team17",
+      "platforms":[
+         "Mobile",
+         "Nintendo Switch",
+         "PC",
+         "PlayStation 5",
+         "Xbox Series X"
+      ],
+      "genre":"Adventure",
+      "price":24.99,
+      "metascore":80,
+      "has_singleplayer":"True",
+      "has_multiplayer":"False",
+      "dlcs":[
+         {
+            "name":"Blackstone Key",
+            "price":4.99,
+            "release_date":"2023-03-30"
+         },
+         {
+            "name":"The Pale Reach",
+            "price":5.99,
+            "release_date":"2023-11-16"
+         }
+      ]
+   },
+   {
+      "name":"Cities: Skylines II",
+      "release_date":"2023-10-24",
+      "developer":"Colossal Order Ltd.",
+      "publisher":"Paradox Interactive",
+      "platforms":[
+         "PC"
+      ],
+      "genre":"City Builder",
+      "price":49.99,
+      "metascore":74,
+      "has_singleplayer":"True",
+      "has_multiplayer":"False",
+      "dlcs":[
+         
+      ]
+   },
+   {
+      "name":"Barotrauma",
+      "release_date":"2023-03-13",
+      "developer":"FakeFish",
+      "publisher":"Daedalic Entertainment",
+      "platforms":[
+         "PC"
+      ],
+      "genre":"Horror",
+      "price":24.99,
+      "metascore":81,
+      "has_singleplayer":"True",
+      "has_multiplayer":"True",
+      "dlcs":[
+         
+      ]
+   },
+   {
+      "name":"Diablo IV",
+      "release_date":"2023-10-17",
+      "developer":"Blizzard Etertainment, Inc.",
+      "publisher":"Blizzard Etertainment, Inc.",
+      "platforms":[
+         "PC",
+         "PlayStation 5",
+         "Xbox Series X"
+      ],
+      "genre":"RPG",
+      "price":49.99,
+      "metascore":86,
+      "has_singleplayer":"True",
+      "has_multiplayer":"True",
+      "dlcs":[
+         {
+            "name":"Original Soundtrack",
+            "price":10.99,
+            "release_date":"2023-10-17"
+         }
+      ]
+   },
+   {
+      "name":"The Talos Principle 2",
+      "release_date":"2023-11-02",
+      "developer":"Croteam",
+      "publisher":"Devolver Digital",
+      "platforms":[
+         "PC",
+         "PlayStation 5",
+         "Xbox Series X"
+      ],
+      "genre":"Puzzle",
+      "price":28.99,
+      "metascore":88,
+      "has_singleplayer":"True",
+      "has_multiplayer":"False",
+      "dlcs":[
+         {
+            "name":"Digital Artbook",
+            "price":4.99,
+            "release_date":"2023-11-02"
+         },
+         {
+            "name":"Original Soundtrack",
+            "price":9.75,
+            "release_date":"2023-12-21"
+         }
+      ]
+   },
+   {
+      "name":"Street Fighter 6",
+      "release_date":"2023-06-01",
+      "developer":"Capcom Co., Ltd.",
+      "publisher":"Capcom Co., Ltd.",
+      "platforms":[
+         "PC",
+         "PlayStation 5",
+         "Xbox Series X"
+      ],
+      "genre":"Action",
+      "price":59.99,
+      "metascore":92,
+      "has_singleplayer":"True",
+      "has_multiplayer":"True",
+      "dlcs":[
+         {
+            "name":"Original Soundtrack",
+            "price":69.99,
+            "release_date":"2023-07-28"
+         },
+         {
+            "name":"Year 1 Character Pass",
+            "price":29.99,
+            "release_date":"2023-06-01"
+         },
+         {
+            "name":"Year 1 Ultimate Pass",
+            "price":49.99,
+            "release_date":"2023-06-01"
+         }
+      ]
+   }
+]
