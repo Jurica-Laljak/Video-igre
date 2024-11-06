@@ -1,3 +1,5 @@
+# Opis
+
 Video igre svake godine postaju sve unosnija industrija. 2023. godine, preko 3 miljarde ljudi u cijelom svijetu igralo je video igre, te tržište video igara 2023. godine imalo je [procijenjenu vrijednost od 282 miljardi dollara](https://explodingtopics.com/blog/number-of-gamers). Za ovako širok skup korisnika potreban je jednostavan način praćenja najnovijih video igri. Ovaj skup podataka nastoji katalogizirati mali broj najpopularnijih video igara nastalih u 2023. godini. Skup podataka u velikoj mjeri obuhvaća multiplatformske video igre, no sadrži i nekoliko primjera popularnih video igara eksluzivnih za određenu platformu. Dodatan naglasak stavljen je na igre koje su osvojile ili su bile nominirane za nagradu na dodjeli nagrada [The Game Awards 2023](https://en.wikipedia.org/wiki/The_Game_Awards_2023). 
 
 # Licencija
