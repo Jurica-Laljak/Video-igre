@@ -1,0 +1,114 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "https://github.com/Jurica-Laljak/Video-igre/blob/main/video-igre.json",
+    "type": ["array", "object"],
+    "title": "Video igre",
+    "description": "Skup podataka o video igrama",
+    "items": {
+        "type": "object",
+        "title": "Video game",
+        "description": "Objekt koji sadrži sve podatke o jednoj video igri.",
+        "required": [
+            "name",
+            "release_date",
+            "developer",
+            "publisher",
+            "platforms",
+            "genre",
+            "price",
+            "metascore",
+            "has_singleplayer",
+            "has_multiplayer",
+            "dlc"
+        ],
+        "properties": {
+            "name": {
+                "type": "string",
+                "title": "Name",
+                "description": "Službeni naziv pod kojime je igra objavljena."
+            },
+            "release_date": {
+                "type": "string",
+                "title": "Release date",
+                "description": "Datum kada je igra međunarodno izdana."
+            },
+            "developer": {
+                "type": "string",
+                "title": "Developer",
+                "description": "Naziv razvojnog tima koji je razvio igru."
+            },
+            "publisher": {
+                "type": "string",
+                "title": "Publisher",
+                "description": "Naziv izdavača koji je igru izdao."
+            },
+            "platforms": {
+                "type": "array",
+                "title": "Platforms",
+                "description": "Popis svih platformi na kojima je igra izdana.",
+                "items": {
+                    "type": "string",
+                    "title": "Platform",
+                    "description": "Ime platforme na kojoj je video igra izdana."
+                }
+            },
+            "genre": {
+                "type": "string",
+                "title": "Genre",
+                "description": "Naziv žanra kojem igra pripada."
+            },
+            "price": {
+                "type": "number",
+                "title": "Price",
+                "description": "Izvorna cijena videoigre izražena u američkim dolarima (USD)."
+            },
+            "metascore": {
+                "type": "integer",
+                "title": "Metascore",
+                "description": "Ocjena na stranici Metacritic."
+            },
+            "has_singleplayer": {
+                "type": "boolean",
+                "title": "Has singleplayer",
+                "description": "Logička vrijednost koja opisuje podržava li igra samostalnu igru."
+            },
+            "has_multiplayer": {
+                "type": "boolean",
+                "title": "Has multiplayer",
+                "description": "Logička vrijednost koja opisuje omogućuje li igra višekorisničku igru."
+            },
+            "dlc": {
+                "type": "array",
+                "title": "DLCs",
+                "description": "Popis svih plaćenih proširenja koji su izdani za igru u godini 2023.",
+                "items": {
+                    "type": "object",
+                    "title": "DLC",
+                    "description": "Objekt koji sadrži sve podatke o DLC-u.",
+                    "required": [
+                        "name",
+                        "price",
+                        "release_date"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "Name",
+                            "description": "Službeni naziv pod kojime je dlc objavljen."
+                        },
+                        "price": {
+                            "type": "number",
+                            "title": "Price",
+                            "description": "Izvorna cijena dlc-a izražena u američkim dollarima (USD)."
+                        },
+                        "release_date": {
+                            "type": "string",
+                            "title": "Release date",
+                            "description": "Datum kada je dlc međunarodno izdan."
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
