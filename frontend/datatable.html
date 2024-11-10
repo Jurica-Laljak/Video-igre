@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/styles/index.css">
+        <link rel="stylesheet" href="/styles/datatable.css">
+        <script src="/scripts/datatable.js" defer></script> 
+        <title>Video-igre</title>
+</head>
+<body>
+        <div>
+                <h1>Alat za pretraživanje skupa podataka</h1>
+                <div id="desc">
+                        <p>Ispod se nalazi alat koji filtriranje skupa podataka i njegov izvoz u CSV i JSON formate.</p>
+                        <p>Započnite pretragu tako da unesete vrijednost po kojoj želite filtrirati skup podataka,
+                                te zatim odaberite jedan od ponuđenih filtara. Da biste izvršili pretragu, kliknite gumb "Pretraži".</p>
+                        <p>Ako se želite vratiti na cjelokupni prikaz podataka, u polju za pretragu izbrišite
+                                vrijednost, te kliknite gumb "Pretraži"
+                        </p>
+                        <p>Napomena: Ako želite unijeti datum, zapišite ga u formatu "YYYY-MM-DD".</p>
+                        <p>Napomena: Ako želite unijeti realan broj, decimalan zarez zapišite kao točku.</p>
+                </div>
+        </div>
+        <form id="form">
+                <div><label for="query">Pretražite skup podataka<br></label></div>
+                <div><input type="text" id="query" name="query" placeholder="Unesite vrijednost" autocomplete="off" value=""></div>
+                <div><label for="filterby">Odaberite filtar</label></div>
+                <div><select name="filterby" id="filterby">
+                        <option value="*">Wildcard (Sva polja)</option>
+                        <option value="games.name">Name (Ime)</option>
+                        <option value="games.release_date">Release date (Datum izdavanja)</option>
+                        <option value="games.developer">Developer (Razvojni tim)</option>
+                        <option value="games.publisher">Publisher (Izdavač)</option>
+                        <option value="platforms.platform">Platform (Platforma)</option>
+                        <option value="games.genre">Genre (Žanr)</option>
+                        <option value="games.price">Price (Cijena)</option>
+                        <option value="games.metascore">Metascore (Ocjena)</option>
+                        <option value="games.has_singleplayer">Has singleplayer (Ima singleplayer)</option>
+                        <option value="games.has_multiplayer">Has multiplayer (Ima multiplayer)</option>
+                        <option value="dlcs.dlc_name">DLC name (Ime DLC-a)</option>
+                        <option value="dlcs.dlc_price">DLC price (Cijena DLC-a)</option>
+                        <option value="dlcs.dlc_release_date">DLC release date (Datum izdavanja DLC-a)</option>
+                </select></div>
+                <div><input type="submit" value="Pretraži" id="submit"></div>   
+        </form>
+        <h3><br>Tablični priklaz skupa podataka<br></h3>
+        <table id="table">
+                <thead id="thead">
+
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+        </table>
+        <p id="empty">Nema rezultata pretrage</p>
+        <br>
+        <div>
+                <a href="http://localhost:3000/download/csv" id="csv">Preuzmi filtrirani skup podataka u CSV formatu</a>
+        </div>
+        <div>
+                <a href="http://localhost:3000/download/json" id="json">Preuzmi filtrirani skup podataka u JSON formatu</a>
+        </div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
