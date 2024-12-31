@@ -1,0 +1,31 @@
+form {
+        border: 1px solid #444444;
+        width: 30%;
+        margin-left: 1vw;
+}
+
+#submit {
+        background-color: #444444;
+        color: white;
+        border: 0px;
+        font-size: medium;
+        cursor: pointer;
+        padding: 3%;
+        border-radius: 3px;
+}
+
+#empty {
+        font-size: x-large;
+        color: #444444;
+        margin-left: 2vw;
+        font-style: italic;
+}
+
+#desc {
+        text-align: justify;
+}
+
+#csv, #json {
+        cursor: pointer;
+        text-decoration: underline;
+}

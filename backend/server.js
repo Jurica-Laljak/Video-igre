@@ -216,5 +216,5 @@ app.get("/download/json", async (req, res) => {
         res.download("video-igre-filtered.json")
 })
 
-app.listen(3000)
-
+app.listen(5173)
+console.log("Listening on port 5173")

@@ -1,0 +1,61 @@
+body {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#json {
+        color: purple;
+}
+
+#csv {
+        color: green;
+}
+
+#table_link {
+        font-size: x-large;
+}
+
+div {
+        margin-top: 1vw;
+        margin-bottom: 1vw;
+        margin-right: 20%;
+        margin-left: 0.5vw;
+}
+
+h1, h2, h3 {
+        margin-left: 0.5vw;
+}
+
+#desc {
+        text-align: justify;
+        word-spacing: 0.2vw;
+}
+
+#license {
+        margin-left: 1vw;
+        font-style: italic;
+        color: #444444;
+}
+
+td {
+        border: 1px solid #444444;
+}
+
+#metadata {
+        width: 45vw;
+}
+
+#GAME {
+        width: 76vw;
+}
+
+#PLATFORMS {
+        width: 32vw;
+}
+
+#DLCS {
+        width: 34vw;
+}
+
+a:visited, a:link {
+        color: darkblue;
+}
