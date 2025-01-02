@@ -1,0 +1,513 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Video-igre",
+    "description": "API koji pruža pristup resursima koji se unutar skupa podataka definiranog na https://github.com/Jurica-Laljak/Video-igre",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Jurica Laljak",
+      "url": "https://github.com/Jurica-Laljak",
+      "email": "jurica.laljak@fer.unizg.hr"
+    },
+    "license": {
+      "name": "GNU General Public License",
+      "url": "https://www.gnu.org/licenses/gpl-3.0.txt"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://localhost:5173/api/v1"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Dlc": {
+        "type": "object",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "price": {
+              "type": "number"
+            },
+            "release_date": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Video_game": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "release_date": {
+            "type": "string"
+          },
+          "developer": {
+            "type": "string"
+          },
+          "publisher": {
+            "type": "string"
+          },
+          "platforms": {
+            "type": "string"
+          },
+          "genre": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "metascore": {
+            "type": "integer"
+          },
+          "has_singleplayer": {
+            "type": "boolean"
+          },
+          "has_multiplayer": {
+            "type": "boolean"
+          },
+          "dlc": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dlc"
+            }
+          }
+        }
+      },
+      "Video_game_complete": {
+        "type": "object",
+        "required": [
+          "name",
+          "release_date",
+          "developer",
+          "publisher",
+          "platforms",
+          "genre",
+          "price",
+          "metascore",
+          "has_singleplayer",
+          "has_multiplayer",
+          "dlc"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "release_date": {
+            "type": "string"
+          },
+          "developer": {
+            "type": "string"
+          },
+          "publisher": {
+            "type": "string"
+          },
+          "platforms": {
+            "type": "string"
+          },
+          "genre": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "metascore": {
+            "type": "integer"
+          },
+          "has_singleplayer": {
+            "type": "boolean"
+          },
+          "has_multiplayer": {
+            "type": "boolean"
+          },
+          "dlc": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dlc"
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/openapi": {
+      "get": {
+        "description": "Dohvaća OpenAPI 3.0.3 specifikaciju koja opisuje ovo sučelje",
+        "operationId": "specificationGet",
+        "responses": {
+          "200": {
+            "description": "Specifikacija uspješno dohvaćena",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "description": "Pogreška u dohvaćanju specifikacije",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collection": {
+      "get": {
+        "description": "Dohvaća cjelokupnu kolekciju videoigara",
+        "operationId": "collectionGet",
+        "responses": {
+          "200": {
+            "description": "Kolekcija uspješno dohvaćena",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "description": "Pogreška u dohvaćanju kolekcije",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resource": {
+      "post": {
+        "description": "Dodaje zapis o video igri u kolekciju",
+        "operationId": "resourcePost",
+        "requestBody": {
+          "description": "Video igra koja će dodati u kolekciju",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Video_game_complete"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Zapis o video igri uspješno dodan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Video_game_complete"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Objekt nije ispravo definiran",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Video_game_complete"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Pogreška u dodavanju zapisa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resource/{id}": {
+      "get": {
+        "description": "Dohvaća zapis resursa s danim ID-om",
+        "operationId": "resourceGet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id zapisa",
+            "required": true,
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Kolekcija uspješno dohvaćena",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Ne postoji resurs s danim ID-om",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Pogreška u dohvaćanju kolekcije",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Ažurira vrijednosti atributa resursa s danim ID-om",
+        "operationId": "resourcePut",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id zapisa",
+            "required": true,
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Popis atributa čija će se vrijednost ažurirati i pripadajućih vrijednosti",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Video_game"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Vrijednosti atributa resursa uspješno ažurirane",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Video_game_complete"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Objekt nije ispravno definiran",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Video_game_complete"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ne postoji resurs s danim ID-om",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Pogreška u dohvaćanju kolekcije",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Briše resurs s danim ID-om",
+        "operationId": "resourceDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id zapisa",
+            "required": true,
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resurs uspješno obrisan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Video_game_complete"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ne postoji resurs s danim ID-om",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Pogreška u dohvaćanju kolekcije",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/genre": {
+      "get": {
+        "description": "Dohvaća popis žanrova svih videoigara koje se nalaze u kolekciji",
+        "operationId": "genreGet",
+        "responses": {
+          "200": {
+            "description": "Žanrovi uspješno dohvaćeni",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Pogreška u dohvaćanju žanrova",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/highrated": {
+      "get": {
+        "description": "Dohvaća popis video igara koje imaju ocjenu na stranici Metacritic veću od 90",
+        "operationId": "highratedGet",
+        "responses": {
+          "200": {
+            "description": "Popis visokorangiranih video igara uspješno dohvaćen",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Video_game_complete"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Pogreška u dohvaćanju video igara",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dlc": {
+      "get": {
+        "description": "Dohvaća popis svih DLC-ova",
+        "operationId": "dlcGet",
+        "responses": {
+          "200": {
+            "description": "DLC-ovi uspješno dohvaćeni",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Dlc"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Pogreška u dohvaćanju DLC-ova",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
