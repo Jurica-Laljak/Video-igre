@@ -327,7 +327,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Video_game_complete"
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "object": {
+                      "$ref": "#/components/schemas/Video_game_complete"
+                    }
+                  }
                 }
               }
             }
