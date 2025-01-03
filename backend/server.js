@@ -218,7 +218,8 @@ app.get("/download/json", async (req, res) => {
         res.download("video-igre-filtered.json")
 })
 
-app.use('/api', api)    //api router
+//api router
+app.use('/api/v1', api)    
 
 app.listen(5173)
 console.log("Listening on port 5173")
