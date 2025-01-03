@@ -3,7 +3,7 @@ const api = require("./routes/api")
 
 const fs = require("node:fs")
 const db = require("./database")
-const rows = require("./rows")
+const rows = require("./data/rows")
 
 const app = express()
 
