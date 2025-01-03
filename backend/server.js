@@ -2,7 +2,9 @@ const express = require("express")
 const api = require("./routes/api")
 
 const fs = require("node:fs")
-const db = require("./database")
+const db = require("./database/database")
+const queryHeader = require("./database/queryHeader")
+const queryFooter = require("./database/queryFooter")
 const rows = require("./data/rows")
 
 const app = express()
@@ -20,45 +22,12 @@ app.get("/video-igre-formatted.json", (req, res) => {
 
 let queryStorage = ""
 
-const queryBase = `SELECT GAMES.name,
-					DATE(GAMES.release_date)::text AS release_date,
-					GAMES.developer,
-					GAMES.publisher,
-					json_agg(DISTINCT PLATFORMS.platform) AS Platforms,
-					GAMES.genre,
-					GAMES.price,
-					GAMES.metascore,
-					CASE
-						WHEN GAMES.has_singleplayer = TRUE THEN 'True'
-						ELSE 'False'
-					END AS has_singleplayer,
-					CASE
-						WHEN GAMES.has_multiplayer = TRUE THEN 'True'
-						ELSE 'False'
-					END AS has_multiplayer,
-					CASE
-						WHEN NOT EXISTS (SELECT DLCS.id
-								FROM GAMES AS g2 JOIN DLCS
-									ON g2.id = DLCS.id_game
-								WHERE g2.id = GAMES.id
-						) THEN '[]'
-						ELSE json_agg(DISTINCT jsonb_build_object(
-								'name', dlc_name,
-								'release_date', dlc_release_date,
-								'price', dlc_price)) 
-					END AS dlc
-					
-				FROM GAMES JOIN PLATFORMS 
-					ON GAMES.id = PLATFORMS.id_game
-						LEFT OUTER JOIN DLCS
-							ON GAMES.id = DLCS.id_game`
-
 async function dbQuery(SQLquery) {
         try {
                 const result = await db.query(SQLquery)
                 return result.rows
         } catch (err) {
-                console.error(err)
+                throw new Error(err)
         }
 }
 
@@ -81,7 +50,7 @@ app.get("/filter/:filterby&:query?", async (req, res) => {
         } else if (!isNaN(userQuery)) {
                 queryType = "num"
         }
-        let SQLquery = queryBase + "\n\n"
+        let SQLquery = queryHeader + "\n\n"
         console.log(queryType)
 
         //create WHERE condition
@@ -116,7 +85,8 @@ app.get("/filter/:filterby&:query?", async (req, res) => {
                 }
         }
 
-        SQLquery += "\nGROUP BY GAMES.id\n\nORDER BY GAMES.id ASC\n"
+        SQLquery += queryFooter
+        //"\nGROUP BY GAMES.id\n\nORDER BY GAMES.id ASC\n"
         queryStorage = SQLquery
         resultJson = await dbQuery(SQLquery)
         res.json(resultJson)

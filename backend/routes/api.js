@@ -17,13 +17,6 @@ router.use("/genre", genre)
 router.use("/highrated", highrated)
 router.use("/dlc", dlc)
 
-/*
-router.get("/", (req, res) => {
-  if (req.url === "/") {
-    throw new Error("Bruh error")
-  }
-}) */
-
 //error handler for api
 router.use((err, req, res, next) => {
   if (res.locals.errmessage) {  //locals.errmessage contains a message about the error
