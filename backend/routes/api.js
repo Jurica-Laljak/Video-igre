@@ -19,13 +19,29 @@ router.use("/dlc", dlc)
 
 //error handler for api
 router.use((err, req, res, next) => {
-  if (res.locals.errmessage) {  //locals.errmessage contains a message about the error
-                                //that a middleware function can send
+  //creating envelope
+  let status = "Internal server error"
+  if (res.locals.errstatus) {  //use custom status if it exists
+    status = res.locals.errstatus
+  }
+  if (res.locals.errmessage) {  //use custom error message if it exists
     err.message = res.locals.errmessage
   }
-  errorEnvelope = new Envelope("Internal server error",
-      err.message, null)
-  res.status(500).json(errorEnvelope)
+  let response = null
+  if (res.locals.errresponse) { //use custom response if it exists
+    response = res.locals.errresponse
+  }
+  errorEnvelope = new Envelope(status,
+      err.message, response)
+
+  //determining status Code    
+  let statusCode = 500
+  if (res.locals.errstatusCode) {  //use custom statusCode if it exists
+    statusCode = res.locals.errstatusCode
+  }
+
+  //sending envelope
+  res.status(statusCode).json(errorEnvelope)
 })
 
 module.exports = router

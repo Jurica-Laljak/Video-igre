@@ -29,6 +29,8 @@ const queryHeader = `SELECT GAMES.name,
 				FROM GAMES JOIN PLATFORMS 
 					ON GAMES.id = PLATFORMS.id_game
 						LEFT OUTER JOIN DLCS
-							ON GAMES.id = DLCS.id_game`
+							ON GAMES.id = DLCS.id_game
+							
+				`
 
 module.exports = queryHeader
