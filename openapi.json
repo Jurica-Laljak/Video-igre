@@ -16,7 +16,7 @@
   },
   "servers": [
     {
-      "url": "https://localhost:5173/api/v1"
+      "url": "https://localhost:5173/api"
     }
   ],
   "components": {

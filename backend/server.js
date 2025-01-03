@@ -1,4 +1,6 @@
 const express = require("express")
+const api = require("./routes/api")
+
 const fs = require("node:fs")
 const db = require("./database")
 const rows = require("./rows")
@@ -67,7 +69,7 @@ app.get("/filter/:filterby&:query?", async (req, res) => {
         let userQuery = req.params["query"]
         let filter = req.params["filterby"]
 
-        //determine cata type of query
+        //determine data type of query
         let queryType = "str"
         const dateRegex = new RegExp("[1-9][0-9][0-9][0-9]-((0[1-9])|(1[1-2]))-(((0|1|2)[1-9])|(3(0|1)))")
         if (dateRegex.test(userQuery)) {
@@ -102,7 +104,7 @@ app.get("/filter/:filterby&:query?", async (req, res) => {
                                         }
                                         SQLquery = SQLquery + el + " = '" + userQuery + "'\n"
                                         alreadyExists = true
-                                        
+
                                 } else if (((rows[el] == "bool") && (queryType == "bool")) || ((rows[el] == "num") && (queryType == "num"))) {
                                         if (alreadyExists) {
                                                 SQLquery += "   OR "
@@ -215,6 +217,8 @@ app.get("/download/json", async (req, res) => {
 
         res.download("video-igre-filtered.json")
 })
+
+app.use('/api', api)    //api router
 
 app.listen(5173)
 console.log("Listening on port 5173")
