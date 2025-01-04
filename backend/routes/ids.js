@@ -5,6 +5,7 @@ const router = express.Router()
 
 router.all("/", async (req, res, next) => {
   responseEnvelope = {}
+  //route method handler
   if (req.method !== "GET") {
     responseEnvelope.status = "Method Not Allowed"
     responseEnvelope.message = "Nad " + req.originalUrl + " nije dozovljena metoda " + req.method
@@ -13,24 +14,17 @@ router.all("/", async (req, res, next) => {
   }
 
   try {
-    result = await dbQuery(`SELECT DISTINCT dlc_name AS name,
-                              dlc_release_date AS release_date,
-                              dlc_price AS price,
-                              GAMES.name AS game
-
-
-                              FROM DLCS JOIN GAMES
-                                ON DLCS.id_game = GAMES.id
-
-                              ORDER BY GAMES.name ASC
-                              `)
+    result = await dbQuery(`SELECT GAMES.id,
+                              GAMES.name
+                              
+                              FROM GAMES`)
     responseEnvelope.status = "OK"
-    responseEnvelope.message = "DLC-ovi uspješno dohvaćeni"
+    responseEnvelope.message = "Popis svih id-ova dohvaćen"
     responseEnvelope.response = result
     res.json(responseEnvelope)
 
   } catch (err) {
-    res.locals.errmessage = "Pogreška u dohvaćanju DLC-ova"
+    res.locals.errmessage = "Pogreška u dohvaćanju popisa id-ova"
     next(err)
   }
 })

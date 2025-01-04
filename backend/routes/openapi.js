@@ -3,8 +3,15 @@ const fs = require("node:fs")
 
 const router = express.Router()
 
-router.get("/", (req, res, next) => {
+router.all("/", (req, res, next) => {
   responseEnvelope = {}
+  if (req.method !== "GET") {
+    responseEnvelope.status = "Method Not Allowed"
+    responseEnvelope.message = "Nad " + req.originalUrl + " nije dozovljena metoda " + req.method
+    responseEnvelope.response = { "allowedMethod": "GET" }
+    res.status(405).json(responseEnvelope)
+  }
+
   fs.readFile("../openapi.json", function (err, data) {
     if (err) {  //error handling
       res.locals.errmessage = "Pogreška u dohvaćanju dokumentacije"

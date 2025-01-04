@@ -5,8 +5,14 @@ const queryFooter = require("../database/queryFooter")
 
 const router = express.Router()
 
-router.get("/", async (req, res, next) => {
+router.all("/", async (req, res, next) => {
   responseEnvelope = {}
+  if (req.method !== "GET") {
+    responseEnvelope.status = "Method Not Allowed"
+    responseEnvelope.message = "Nad " + req.originalUrl + " nije dozovljena metoda " + req.method
+    responseEnvelope.response = { "allowedMethod": "GET" }
+    res.status(405).json(responseEnvelope)
+  }
 
   try {
     result = await dbQuery(queryHeader + queryFooter)

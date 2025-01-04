@@ -16,7 +16,7 @@
   },
   "servers": [
     {
-      "url": "https://localhost:5173/api"
+      "url": "https://localhost:5173/api/v1"
     }
   ],
   "components": {
@@ -24,16 +24,29 @@
       "Error": {
         "type": "object",
         "required": [
-          "message"
+          "status",
+          "message",
+          "response"
         ],
         "properties": {
+          "status": {
+            "type": "string"
+          },
           "message": {
             "type": "string"
+          },
+          "response": {
+            "type": "object"
           }
         }
       },
       "Dlc": {
         "type": "object",
+        "required": [
+          "name",
+          "price",
+          "release_date"
+        ],
         "items": {
           "type": "object",
           "properties": {
@@ -44,6 +57,32 @@
               "type": "number"
             },
             "release_date": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Dlc_extended": {
+        "type": "object",
+        "required": [
+          "name",
+          "price",
+          "release_date",
+          "game"
+        ],
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "price": {
+              "type": "number"
+            },
+            "release_date": {
+              "type": "string"
+            },
+            "game": {
               "type": "string"
             }
           }
@@ -265,7 +304,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Kolekcija uspješno dohvaćena",
+            "description": "Resurs uspješno dohvaćen",
             "content": {
               "application/json": {}
             }
@@ -361,7 +400,7 @@
             }
           },
           "default": {
-            "description": "Pogreška u dohvaćanju kolekcije",
+            "description": "Pogreška u ažuriranju resursa",
             "content": {
               "application/json": {
                 "schema": {
@@ -412,7 +451,7 @@
             }
           },
           "default": {
-            "description": "Pogreška u dohvaćanju kolekcije",
+            "description": "Pogreška u brisanju resursa",
             "content": {
               "application/json": {
                 "schema": {
@@ -455,26 +494,34 @@
         }
       }
     },
-    "/highrated": {
+    "/ids": {
       "get": {
-        "description": "Dohvaća popis video igara koje imaju ocjenu na stranici Metacritic veću od 90",
+        "description": "Dohvaća popis svih id-ova i pripadajućih naziva igara",
         "operationId": "highratedGet",
         "responses": {
           "200": {
-            "description": "Popis visokorangiranih video igara uspješno dohvaćen",
+            "description": "Popis svih id-ova dohvaćen",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Video_game_complete"
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               }
             }
           },
           "default": {
-            "description": "Pogreška u dohvaćanju video igara",
+            "description": "Pogreška u dohvaćanju popisa id-ova",
             "content": {
               "application/json": {
                 "schema": {
@@ -498,7 +545,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Dlc"
+                    "$ref": "#/components/schemas/Dlc_extended"
                   }
                 }
               }

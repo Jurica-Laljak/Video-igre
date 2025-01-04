@@ -196,8 +196,6 @@ app.use('/api/v1', api)
 
 //error handler
 app.use((err, req, res, next) => {
-        console.log(err.stack)
-        console.log("\n")
         //creating envelope
         let status = "Internal server error"
         if (res.locals.errstatus) {  //use custom status if it exists
