@@ -7,19 +7,13 @@ const router = express.Router()
 
 router.all("/", async (req, res, next) => {
   responseEnvelope = {}
-  if (req.method !== "GET") {
-    responseEnvelope.status = "Method Not Allowed"
-    responseEnvelope.message = "Nad " + req.originalUrl + " nije dozovljena metoda " + req.method
-    responseEnvelope.response = { "allowedMethod": "GET" }
-    res.status(405).json(responseEnvelope)
-  }
-
   try {
     result = await dbQuery(queryHeader + queryFooter)
     responseEnvelope.status = "OK"
     responseEnvelope.message = "Kolekcija uspješno dohvaćena"
     responseEnvelope.response = result
     res.json(responseEnvelope)
+    return
 
   } catch (err) {
     res.locals.errmessage = "Pogreška u dohvaćanju kolekcije"

@@ -5,13 +5,6 @@ const router = express.Router()
 
 router.all("/", async (req, res, next) => {
   responseEnvelope = {}
-  //route method handler
-  if (req.method !== "GET") {
-    responseEnvelope.status = "Method Not Allowed"
-    responseEnvelope.message = "Nad " + req.originalUrl + " nije dozovljena metoda " + req.method
-    responseEnvelope.response = { "allowedMethod": "GET" }
-    res.status(405).json(responseEnvelope)
-  }
 
   try {
     result = await dbQuery(`SELECT GAMES.id,
@@ -22,6 +15,7 @@ router.all("/", async (req, res, next) => {
     responseEnvelope.message = "Popis svih id-ova dohvaćen"
     responseEnvelope.response = result
     res.json(responseEnvelope)
+    return
 
   } catch (err) {
     res.locals.errmessage = "Pogreška u dohvaćanju popisa id-ova"

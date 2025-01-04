@@ -7,10 +7,44 @@ const queryHeader = require("./database/queryHeader")
 const queryFooter = require("./database/queryFooter")
 const rows = require("./data/rows")
 const Envelope = require('./data/schemas/envelope')
+const routeMap = require('./data/routeMap')
 
 const app = express()
 
 app.use(express.static("../frontend"))  //static delivery middleware
+app.use((req, res, next) => {
+        var responseEnvelope = {}
+        var route = req.url.split("/v1/")[1]
+        if (!route) {
+                responseEnvelope.status = "Bad Request"
+                responseEnvelope.message = req.url + " nije validna putanja"
+                responseEnvelope.response = null
+                res.status(400).json(responseEnvelope)
+        }
+        let matchResults = []
+        Object.keys(routeMap).forEach((key) => {
+                if (route.includes(key)) {
+                        matchResults.push(key)
+                }
+        })
+        matchResults.sort((a, b) => b.length - a.length)        //sort descending by length
+        route = matchResults[0]
+
+        if (!routeMap[route]) {
+                responseEnvelope.status = "Bad Request"
+                responseEnvelope.message = req.url + " nije validna putanja"
+                responseEnvelope.response = null
+                res.status(400).json(responseEnvelope)
+        } else if (!routeMap[route].includes(req.method)) {
+                        responseEnvelope.status = "Method Not Allowed"
+                        responseEnvelope.message = "Nad " + req.url + " nije dozovljena metoda " + req.method
+                        responseEnvelope.response = { "allowedMethods": routeMap[route] }
+                        res.status(405).json(responseEnvelope)
+        } else {
+                next()
+        }
+})
+
 app.use(express.json())   //json response writer middleware
 
 app.get("/video-igre.csv", (req, res) => {

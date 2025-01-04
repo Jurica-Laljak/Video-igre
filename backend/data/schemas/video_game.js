@@ -1,4 +1,4 @@
-const platforms = require("../platforms")
+const platformsMap = require("../platformsMap")
 const Dlc = require("./dlc")
 
 class VideoGame {
@@ -50,7 +50,7 @@ class VideoGame {
           throw new SyntaxError("Polje platforms ne smije biti prazno")
         }
         platforms.forEach((el) => {
-          if (!platforms.includes(el)) {
+          if (!platformsMap.includes(el)) {
             throw new SyntaxError(el + " nije platforma")
           }
         })
