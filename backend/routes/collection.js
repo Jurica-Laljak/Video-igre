@@ -1,6 +1,6 @@
 const express = require('express')
 const dbQuery = require("../database/dbQuery")
-const queryHeader = require("../database/queryHeader")
+const queryHeader = require("../database/queryHeaderWithId")
 const queryFooter = require("../database/queryFooter")
 
 const router = express.Router()

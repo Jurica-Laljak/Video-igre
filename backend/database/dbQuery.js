@@ -5,7 +5,7 @@ async function dbQuery(SQLquery) {
                 const result = await db.query(SQLquery)
                 return result.rows
         } catch (err) {
-                throw new Error(err)
+                throw new Error(err.stack)
         }
 }
 

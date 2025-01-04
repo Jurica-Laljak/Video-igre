@@ -1,4 +1,7 @@
-const queryHeader = `SELECT 
+const selectQueryHeader = `
+
+          SELECT 
+					GAMES.id,
 					GAMES.name,
 					DATE(GAMES.release_date)::text AS release_date,
 					GAMES.developer,
@@ -31,7 +34,7 @@ const queryHeader = `SELECT
 					ON GAMES.id = PLATFORMS.id_game
 						LEFT OUTER JOIN DLCS
 							ON GAMES.id = DLCS.id_game
-							
-				`
+        
+        WHERE GAMES.name LIKE `
 
-module.exports = queryHeader
+module.exports = selectQueryHeader

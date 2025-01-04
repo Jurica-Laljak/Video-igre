@@ -1,4 +1,5 @@
-const queryHeader = `SELECT 
+const queryHeaderWithId = `SELECT 
+          GAMES.id,
 					GAMES.name,
 					DATE(GAMES.release_date)::text AS release_date,
 					GAMES.developer,
@@ -34,4 +35,4 @@ const queryHeader = `SELECT
 							
 				`
 
-module.exports = queryHeader
+module.exports = queryHeaderWithId

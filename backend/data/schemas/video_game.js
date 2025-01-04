@@ -41,6 +41,9 @@ class VideoGame {
         throw new SyntaxError("Nedostaje atribut platforms")
       }
       if (Array.isArray(platforms)) {
+        if (platforms.length == 0) {
+          throw new SyntaxError("Polje patforms ne smije biti prazno")
+        }
         platforms.forEach((el) => {
           if (!platforms.includes(el)) {
             throw new SyntaxError(el + " nije platforma")
