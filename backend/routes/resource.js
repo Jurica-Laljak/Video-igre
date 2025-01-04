@@ -6,8 +6,9 @@ const queryFooter = require("../database/queryFooter")
 const VideoGame = require("../data/schemas/video_game")
 const Envelope = require('../data/schemas/envelope')
 const selectQueryHeader = require("../database/resourceGet/selectQueryHeader.js")
-const insertQueryHeader = require("../database/resourcePost/insertQueryHeader")
+const insertQueryHeader = require("../database/resourcePost/insertQueryHeader.js")
 const deleteQueryHeader = require("../database/resourceDelete/deleteQueryHeader")
+const deleteQueryFooter = require("../database/resourceDelete/deleteQueryFooter")
 
 const router = express.Router()
 
@@ -52,7 +53,7 @@ router.post("/", async (req, res, next) => {
       var videoGame = new VideoGame(req.body.name, req.body.release_date, req.body.developer,
         req.body.publisher, req.body.platforms, req.body.genre, req.body.price,
         req.body.metascore, req.body.has_singleplayer, req.body.has_multiplayer,
-        req.body.dlc)
+        req.body.dlc, false)
 
     } catch (err) { //body syntax not properly definied
       if (!err.message) {
@@ -70,7 +71,7 @@ router.post("/", async (req, res, next) => {
       if (checkResult.length > 0) {  //if result isn't empty, record already exists
         throw new Error("Zapis s identičnim imenom već postoji u bazi podataka")
       }
-    } catch(err) {
+    } catch (err) {
       if (err.message) {
         res.locals.errmessage = err.message
       }
@@ -80,34 +81,34 @@ router.post("/", async (req, res, next) => {
     }
 
     //inserting object into database
-    let insert1 = insertQueryHeader + "'" + videoGame.name + "', '" + videoGame.release_date 
+    let insert1 = insertQueryHeader + "'" + videoGame.name + "', '" + videoGame.release_date
       + "', '" + videoGame.developer + "', '" + videoGame.publisher + "', '" + videoGame.genre
       + "', " + videoGame.price + ", " + videoGame.metascore + ", "
       + videoGame.has_singleplayer.toUpperCase() + ", "
       + videoGame.has_multiplayer.toUpperCase() + `)
                                                     RETURNING *;`
-    
+
     insertResult = await dbQuery(insert1)   //INSERT INTO GAMES
     //console.log(insert1)
     //insertResult = [{"id": 20, "bruh": "31"}]
 
     let insert2 = ""
     videoGame.platforms.forEach((platform) => {
-      insert2 = insert2 + 
-      `INSERT INTO PLATFORMS (platform, id_game) 
+      insert2 = insert2 +
+        `INSERT INTO PLATFORMS (platform, id_game) 
         VALUES (` + "'" + platform + "', " + insertResult[0].id + `);
                                                                                 `
-    })         
+    })
     await dbQuery(insert2)  //INSERT INTO PLATFORMS
     //console.log(insert2)
 
     if (videoGame.dlc.length > 0) {
       let insert3 = ""
       videoGame.dlc.forEach((dlcItem) => {
-        insert3 = insert3 + 
-        `INSERT INTO DLCS (dlc_name, dlc_release_date, dlc_price, id_game)
-          VALUES (` + "'" + dlcItem.name + "', '" + dlcItem.release_date + "', " 
-        + dlcItem.price + ", " + insertResult[0].id + `);
+        insert3 = insert3 +
+          `INSERT INTO DLCS (dlc_name, dlc_release_date, dlc_price, id_game)
+          VALUES (` + "'" + dlcItem.name + "', '" + dlcItem.release_date + "', "
+          + dlcItem.price + ", " + insertResult[0].id + `);
                                                       `
       })
 
@@ -128,7 +129,124 @@ router.post("/", async (req, res, next) => {
   }
 })
 
-/*
+router.put("/:id", async (req, res, next) => {
+  responseEnvelope = {}
+  let id = req.params.id
+  try {
+    result = await dbQuery(queryHeader +
+      `WHERE GAMES.id = `
+      + id
+      + queryFooter)
+    try {   //check if resource with given id exists
+      if ((Array.isArray(result)) && (result.length == 0)) {
+        throw new Error("")
+      }
+    } catch (err) {
+      res.locals.errmessage = "Ne postoji resurs s danim ID-om"
+      res.locals.errstatus = "Not Found"
+      res.locals.errstatusCode = 404
+      next(err)
+    }
+
+    try {
+      if (Object.keys(req.body).length === 0) { //if body is empty
+        throw new Error("Tijelo zahtjeva je prazno")
+      }
+
+      var videoGame = new VideoGame(req.body.name, req.body.release_date, req.body.developer,
+        req.body.publisher, req.body.platforms, req.body.genre, req.body.price,
+        req.body.metascore, req.body.has_singleplayer, req.body.has_multiplayer,
+        req.body.dlc, true)
+
+      //updateing record with given id
+      let update1 = `UPDATE GAMES SET 
+      `
+      propsWithQuotes = ["name", "release_date", "developer",
+        "publisher", "genre"]
+      //creating update GAMES statement
+      let i = 0
+      if (Object.hasOwn(videoGame, "platforms")) i += 1
+      if (Object.hasOwn(videoGame, "dlc")) i += 1 
+
+      for (let prop in videoGame) {
+        if (prop !== "platforms" && prop !== "dlc") {
+          update1 = update1 + prop + " = "
+          if (propsWithQuotes.indexOf(prop) >= 0) {   //if property with quotes
+            update1 = update1 + "'" + videoGame[prop] + "'"
+          } else {  //property without quotes
+            update1 = update1 + videoGame[prop]
+          }
+          if ((i + 1) < Object.keys(videoGame).length) {
+            update1 = update1 + ","
+          }
+          update1 = update1 + `
+          `
+          i += 1
+        }
+      }
+      update1 = update1 + "WHERE id = " + id + `;
+      `
+
+      var sqlQuery = update1
+
+      //creating update PLATFORMS statemenet
+      if (Object.hasOwn(videoGame, "platforms")) {
+        var delete2 = `DELETE FROM PLATFORMS WHERE id_game = ` + id + `;
+        `
+        var insert2 = ""
+        videoGame.platforms.forEach((platform) => {
+          insert2 = insert2 +
+            `INSERT INTO PLATFORMS (platform, id_game) 
+            VALUES (` + "'" + platform + "', " + id + `);
+            `
+        })
+        sqlQuery = sqlQuery + delete2 + insert2
+      }
+
+      //creating update DLCS statement
+      if (Object.hasOwn(videoGame, "dlc")) {
+        var delete3 = `DELETE FROM DLCS WHERE id_game = ` + id + `;
+        `
+        var insert3 = ""
+        videoGame.dlc.forEach((dlcItem) => {
+          insert3 = insert3 +
+            `INSERT INTO DLCS (dlc_name, dlc_release_date, dlc_price, id_game)
+            VALUES (` + "'" + dlcItem.name + "', '" + dlcItem.release_date + "', "
+            + dlcItem.price + ", " + id + `);
+            `
+        })
+        sqlQuery = sqlQuery + delete3 + insert3
+      } 
+
+      await dbQuery(sqlQuery)  //updateing record
+
+      //fetch updated record
+      result = await dbQuery(queryHeader +
+        `WHERE GAMES.id = `
+        + id
+        + queryFooter)
+
+      responseEnvelope.status = "OK"
+      responseEnvelope.message = "Vrijednosti atributa resursa uspješno ažurirane"
+      responseEnvelope.response = result
+      res.json(responseEnvelope) 
+
+    } catch (err) { //body syntax not properly definied
+      if (!err.message) {
+        res.locals.errmessage = "Objekt nije ispravno definiran"
+      }
+      res.locals.errstatus = "Bad Request"
+      res.locals.errstatusCode = 400
+      next(err)
+    }
+
+  } catch (err) {
+    res.locals.errmessage = "Pogreška u brisanju resursa"
+    next(err)
+  }
+})
+
+
 router.delete("/:id", async (req, res, next) => {
   responseEnvelope = {}
   let id = req.params.id
@@ -147,17 +265,18 @@ router.delete("/:id", async (req, res, next) => {
       res.locals.errstatusCode = 404
       next(err)
     }
-    let sqlQuery = deleteQueryHeader + result.id
+    //deleting resource with given id
+    let sqlQuery = deleteQueryHeader + id + deleteQueryFooter
     result = await dbQuery(sqlQuery)
     responseEnvelope.status = "OK"
-    responseEnvelope.message = "Resurs uspješno dohvaćen"
+    responseEnvelope.message = "Resurs uspješno obrsian"
     responseEnvelope.response = result
     res.json(responseEnvelope)
   } catch (err) {   //non-specific error handling
-    res.locals.errmessage = "Pogreška u dohvaćanju resursa"
+    res.locals.errmessage = "Pogreška u brisanju resursa"
     next(err)
   }
-}) */
+})
 
 
 module.exports = router
