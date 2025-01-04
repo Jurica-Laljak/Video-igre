@@ -1,7 +1,10 @@
 const express = require('express')
+
 const dbQuery = require("../database/dbQuery")
 const queryHeader = require("../database/queryHeader")
 const queryFooter = require("../database/queryFooter")
+const VideoGame = require("../data/schemas/video_game")
+const Envelope = require('../data/schemas/envelope')
 
 const router = express.Router()
 
@@ -28,8 +31,39 @@ router.get("/:id", async (req, res, next) => {
       next(err)
     }
 
-  } catch (err) {   //error handling
+  } catch (err) {   //non-specific error handling
     res.locals.errmessage = "Pogreška u dohvaćanju resursa"
+    next(err)
+  }
+})
+
+router.post("/", (req, res, next) => {
+  responseEnvelope = {}
+  try {
+    try {
+      //console.log(req.body)
+      if (Object.keys(req.body).length === 0) { //if body is empty
+        throw new Error("Tijelo zahtjeva je prazno")
+      }
+
+      let videoGame = new VideoGame(req.body.name, req.body.release_date, req.body.developer,
+        req.body.publisher, req.body.platforms, req.body.genre, req.body.price,
+        req.body.metascore, req.body.has_singleplayer, req.body.has_multiplayer,
+        req.body.dlc)
+
+      //inserting object into database
+      
+      
+    } catch (err) { //body syntax not properly definied
+      if (!err.message) {
+        res.locals.errmessage = "Objekt nije ispravno definiran"
+      }
+      res.locals.errstatus = "Bad Request"
+      res.locals.errstatusCode = 400
+      next(err)
+    }
+  } catch (err) { //non-specific error handling
+    res.locals.errmessage = "Pogreška u dodavanju resursa"
     next(err)
   }
 })

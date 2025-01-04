@@ -6,11 +6,12 @@ const db = require("./database/database")
 const queryHeader = require("./database/queryHeader")
 const queryFooter = require("./database/queryFooter")
 const rows = require("./data/rows")
+const Envelope = require('./data/schemas/envelope')
 
 const app = express()
 
-app.use(express.static("../frontend"))
-app.use(express.json())
+app.use(express.static("../frontend"))  //static delivery middleware
+app.use(express.json())   //json response writer middleware
 
 app.get("/video-igre.csv", (req, res) => {
         res.download("../video-igre.csv")
@@ -189,7 +190,38 @@ app.get("/download/json", async (req, res) => {
 })
 
 //api router
-app.use('/api/v1', api)    
+app.use('/api/v1', api)
+
+
+//error handler
+app.use((err, req, res, next) => {
+        //creating envelope
+        let status = "Internal server error"
+        if (res.locals.errstatus) {  //use custom status if it exists
+                status = res.locals.errstatus
+        }
+        if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+                err.message = "JSON objekt nije ispravno definiran"
+        } else if (res.locals.errmessage) {  //use custom error message if it exists
+                err.message = res.locals.errmessage
+        }
+
+        let response = null
+        if (res.locals.errresponse) { //use custom response if it exists
+                response = res.locals.errresponse
+        }
+        errorEnvelope = new Envelope(status,
+                err.message, response)
+
+        //determining status Code    
+        let statusCode = 500
+        if (res.locals.errstatusCode) {  //use custom statusCode if it exists
+                statusCode = res.locals.errstatusCode
+        }
+
+        //sending envelope
+        res.status(statusCode).json(errorEnvelope)
+})
 
 app.listen(5173)
 console.log("Listening on port 5173")
