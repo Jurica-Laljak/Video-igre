@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="title" content="Video igre">
+  <meta name="author" content="Jurica Laljak">
+  <meta name="keywords" content="video games, games, pc games, open">
+  <meta name="description"
+    content="Video igre svake godine postaju sve unosnija industrija. 2023. godine, preko 3 miljarde ljudi u cijelom svijetu igralo je video igre, te tržište video igara 2023. godine imalo je procijenjenu vrijednost od 282 miljardi dollara. Za ovako širok skup korisnika potreban je jednostavan način praćenja najnovijih video igri. Ovaj skup podataka nastoji katalogizirati mali broj najpopularnijih video igara nastalih u 2023. godini. Skup podataka u velikoj mjeri obuhvaća multiplatformske video igre, no sadrži i nekoliko primjera popularnih video igara eksluzivnih za određenu platformu. Dodatan naglasak stavljen je na igre koje su osvojile ili su bile nominirane za nagradu na dodjeli nagrada The Game Awards 2023.">
+  <link rel="stylesheet" href="/styles/index.css">
+  <title>Video-igre</title>
+</head>
+
+<body>
+  <header>
+    <h1>Opis</h1>
+    <div class="flex-right">
+      <% if(isAuthenticated){ %>
+        <div class="button-container">
+          <a href="http://localhost:5173/user" class="button" id="user">Korisnički profil</a>
+        </div>
+        <div class="button-container">
+          <a class="button" id="refresh">Osvježi preslike</a>
+        </div>
+        <div class="button-container">
+          <a class="button">Odjava</a>
+        </div>
+        <% } else{ %>
+          <div class="button-container">
+            <a href="http://localhost:5173/login" class="button">Prijava</a>
+          </div>
+          <% } %>
+    </div>
+
+
+  </header>
+  <div id="desc">
+    Video igre svake godine postaju sve unosnija industrija. 2023. godine, preko 3 miljarde ljudi u cijelom svijetu
+    igralo je video igre, te tržište video igara 2023. godine imalo je procijenjenu vrijednost od 282 miljardi dollara.
+    Za ovako širok skup korisnika potreban je jednostavan način praćenja najnovijih video igri. Ovaj skup podataka
+    nastoji katalogizirati mali broj najpopularnijih video igara nastalih u 2023. godini. Skup podataka u velikoj mjeri
+    obuhvaća multiplatformske video igre, no sadrži i nekoliko primjera popularnih video igara eksluzivnih za određenu
+    platformu. Dodatan naglasak stavljen je na igre koje su osvojile ili su bile nominirane za nagradu na dodjeli
+    nagrada The Game Awards 2023.
+  </div>
+  <h1>Licencija</h1>
+  <div id="license">
+    Ovaj repozitorij spada pod licencu GNU General Public License v3.0. Sadržaj ovog repozitorija dozvoljeno je
+    koristiti u komercijalne svrhe, distribuirati, modificirati, te koristiti u privatne svrhe. Navedena prava
+    dozvoljena su samo ako je na svakoj licenciranoj datoteci jasno naznačeno korištenje ove licence. Licencirani
+    materijal mora navesti izvor s kojega je materijal preuzet, te sve promjene moraju biti licencirane pod istom
+    licencom. Sadržaj ovog repozitorija nije dozvoljeno distribuirati u zatvorenom obliku.
+  </div>
+  <h1>Metapodaci</h1>
+  <table id="metadata">
+    <tr>
+      <th>Podatak</th>
+      <th>Opis</th>
+    </tr>
+    <tr>
+      <td>Naziv</td>
+      <td>Video igre</td>
+    </tr>
+    <tr>
+      <td>URI</td>
+      <td>https://github.com/Jurica-Laljak/Video-igre</td>
+    </tr>
+    <tr>
+      <td>Najnovija verzija</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <td>Datum objave</td>
+      <td>2024-10-27</td>
+    </tr>
+    <tr>
+      <td>Ključne riječi</td>
+      <td>video games, games, pc games, open</td>
+    </tr>
+    <tr>
+      <td>Jezik</td>
+      <td>english</td>
+    </tr>
+    <tr>
+      <td>Vremenski opseg podataka</td>
+      <td>2023. godina</td>
+    </tr>
+    <tr>
+      <td>Standard datuma i vremena</td>
+      <td>[ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)</td>
+    </tr>
+    <tr>
+      <td>Dostupni formati</td>
+      <td>CSV, JSON</td>
+    </tr>
+    <tr>
+      <td>Autor</td>
+      <td>[Jurica Laljak](https://github.com/Jurica-Laljak)</td>
+    </tr>
+    <tr>
+      <td>Licencija</td>
+      <td>GNU General Public License v3.0</td>
+    </tr>
+  </table>
+  <h1>Shema skupa podataka</h1>
+  <h3>Shema relacije GAME</h3>
+  <table id="GAME">
+    <tr>
+      <th>Naziv atributa</th>
+      <th>Opis atributa</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>Interni atribut unutar baze podataka. Primarni ključ relacije GAME.</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Službeni naziv pod kojime je igra objavljena.</td>
+    </tr>
+    <tr>
+      <td>release_date</td>
+      <td>Datum kada je igra međunarodno izdana.</td>
+    </tr>
+    <tr>
+      <td>developer</td>
+      <td>Naziv razvojnog tima koji je razvio igru.</td>
+    </tr>
+    <tr>
+      <td>publisher</td>
+      <td>Naziv izdavača koji je igru izdao.</td>
+    </tr>
+    <tr>
+      <td>platforms</td>
+      <td>Popis platformi na kojima je igra izdana. Platforme uključuju PC, PlayStation 5, Xbox Series X, Nintendo
+        Switch, Mobile</td>
+    </tr>
+    <tr>
+      <td>genre</td>
+      <td>Naziv žanra kojem igra pripada. Popularni primjeri žanrova su RPG, FPS, Strategy, Adventure, Sports, Casual,
+        Action, itd.</td>
+    </tr>
+    <tr>
+      <td>price</td>
+      <td>Izvorna cijena videoigre. Izražena u američkim dollarima (USD).</td>
+    </tr>
+    <tr>
+      <td>metascore</td>
+      <td>Ocjena na stranici <a href="https://www.metacritic.com/">Metacritic</a>. Ocjena je izračunata agregiranjem
+        recenzija časopisa i korisnika.</td>
+    </tr>
+    <tr>
+      <td>has_singleplayer</td>
+      <td>Logička vrijednost koja opisuje podržava li igra samostalnu igru.</td>
+    </tr>
+    <tr>
+      <td>has_multiplayer</td>
+      <td>Logička vrijednost koja opisuje omogućuje li igra višekorisničku igru.</td>
+    </tr>
+    <tr>
+      <td>dlc</td>
+      <td>Popis svih plaćenih proširenja (eng. &quot;downloadable content&quot;, &quot;DLC&quot;) koji su izdani za igru
+        u 2023. godini. Svaki DLC objekt sadrži atribute prema shemi DLC.</td>
+    </tr>
+  </table>
+  <h3>Shema relacije PLATFORMS</h3>
+  <table id="PLATFORMS">
+    <tr>
+      <th>Naziv atributa</th>
+      <th>Opis atributa</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>Primarni ključ relacije PLATFORMS</td>
+    </tr>
+    <tr>
+      <td>platform</td>
+      <td>Ime platforme na kojoj je video igra izdana.</td>
+    </tr>
+    <tr>
+      <td>id_game</td>
+      <td>Identifikator video igre čije izdanje se nalazi na platformi.</td>
+    </tr>
+  </table>
+  <h3>Shema relacije DLCS</h3>
+  <table id="DLCS">
+    <tr>
+      <th>Naziv atributa</th>
+      <th>Opis atributa</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>Primarni ključ relacije DLC.</td>
+    </tr>
+    <tr>
+      <td>name_dlc</td>
+      <td>Službeni naziv pod kojime je dlc objavljen.</td>
+    </tr>
+    <tr>
+      <td>release_date_dlc</td>
+      <td>Datum kada je dlc međunarodno izdan.</td>
+    </tr>
+    <tr>
+      <td>price_dlc</td>
+      <td>Izvorna cijena dlc-a. Izražena u američkim dollarima (USD).</td>
+    </tr>
+    <tr>
+      <td>id_game</td>
+      <td>Identifikator video igre koju dlc proširuje.</td>
+    </tr>
+  </table>
+  <br>
+  <div id="cont">
+    <div>
+      <a href="datatable.html" id="table_link">Interaktivni prikaz podataka</a>
+    </div>
+    <br>
+    <div>
+      <a href="../video-igre.csv" id="csv">Preuzmi skup podataka u CSV formatu</a>
+    </div>
+    <div>
+      <a href="../video-igre-formatted.json" id="json">Preuzmi skup podataka u JSON formatu</a>
+    </div>
+  </div>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+
+</html>

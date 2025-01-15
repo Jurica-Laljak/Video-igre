@@ -13,26 +13,45 @@ h1 {
         display: block;
 }
 
-#button-container {
-        background-color: green;
+.flex-right {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: fit-content;
+        gap: 1rem;
+        margin-right: 3%;
+}
+
+.button-container {
         display: flex;
         justify-content: center;
         align-items: center;
         margin: 0px;
-        margin-right: 5%;
         padding: 0px;
+        width: fit-content;
+        text-align: center;
 }
 
-#login-button {
+.button {
         display: block;
         background-color: #444444;
-        color: white;
+        color: pink;
         border: 0px;
         font-size: medium;
         cursor: pointer;
-        padding: 20%;
+        padding-inline: 20%;
+        padding-block: 10%;
         border-radius: 3px;
         font-weight: bold;
+        text-decoration: none;
+}
+
+.button:any-link {
+        color: white;
+}
+
+.button:visited, .button:link {
+        color: white;
 }
 
 #json {

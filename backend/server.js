@@ -1,5 +1,6 @@
 const express = require("express")
 const api = require("./routes/api")
+require('dotenv').config()
 
 const fs = require("node:fs")
 const db = require("./database/database")
@@ -10,6 +11,21 @@ const Envelope = require('./data/schemas/envelope')
 const routeMap = require('./data/routeMap')
 
 const app = express()
+
+//auth0 implmentation:
+const { auth } = require('express-openid-connect')
+const { requiresAuth } = require('express-openid-connect')
+const config = {
+        authRequired: false,
+        auth0Logout: true,
+        secret: process.env.SECRET,
+        baseURL: 'http://localhost:5173',
+        clientID: 'x8mMh6O5xViZanDofGspgchKMMdzHc1E',
+        issuerBaseURL: 'https://dev-vfswr3lxm2ldbqqa.eu.auth0.com'
+}
+app.use(auth(config))
+
+app.set('view engine', 'ejs')
 
 app.use(express.static("../frontend"))  //static delivery middleware
 /*
@@ -48,6 +64,16 @@ app.use((req, res, next) => {
 */
 
 app.use(express.json())   //json response writer middleware
+
+app.get('/', (req, res) => {
+        isAuthenticated = req.oidc.isAuthenticated()
+        res.render('index', { isAuthenticated })
+})
+
+app.get('/user', requiresAuth(), (req, res) => {
+        var userData = req.oidc.user
+        res.render('user', { userData })
+})
 
 app.get("/video-igre.csv", (req, res) => {
         res.download("../video-igre.csv")
@@ -227,7 +253,6 @@ app.get("/download/json", async (req, res) => {
 
 //api router
 app.use('/api/v1', api)
-
 
 
 //error handler

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/index.css">
+  <script src="/scripts/user.js" defer></script>
+  <title>Video-igre</title>
+</head>
+
+<body>
+  <h1>Korisnički podaci za <%=userData.name%>
+  </h1>
+  <table>
+    <%for (key in userData) { %>
+        <tr>
+          <td>
+            <%=key%>
+          </td>
+          <td>
+            <%=userData[key]%>
+          </td>
+        </tr>
+    <%};%>
+  </table>
+  <br>
+  <div class="button-container">
+    <a href="http://localhost:5173/" class="button">
+      Povratak na početnu stranicu
+    </a>
+  </div>
+  <% for (let i = 0; i < 15; i++) { %>
+    <br>
+  <% } %>
+  <div class="button-container">
+    <a href="http://localhost:5173/logout" class="button" style="color: lightblue">
+      Odjavi me s usluge Auth0
+    </a>
+  </div>
+</body>
+
+</html>
