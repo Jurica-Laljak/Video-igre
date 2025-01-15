@@ -2,6 +2,39 @@ body {
         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
+header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+}
+
+h1 {
+        display: block;
+}
+
+#button-container {
+        background-color: green;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0px;
+        margin-right: 5%;
+        padding: 0px;
+}
+
+#login-button {
+        display: block;
+        background-color: #444444;
+        color: white;
+        border: 0px;
+        font-size: medium;
+        cursor: pointer;
+        padding: 20%;
+        border-radius: 3px;
+        font-weight: bold;
+}
+
 #json {
         color: purple;
 }

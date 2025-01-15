@@ -12,6 +12,7 @@ const routeMap = require('./data/routeMap')
 const app = express()
 
 app.use(express.static("../frontend"))  //static delivery middleware
+/*
 app.use((req, res, next) => {
         var responseEnvelope = {}
         var route = req.url.split("/v1/")[1]
@@ -44,6 +45,7 @@ app.use((req, res, next) => {
                 next()
         }
 })
+*/
 
 app.use(express.json())   //json response writer middleware
 
