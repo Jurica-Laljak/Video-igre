@@ -1,2 +1,3 @@
 # ignore ALL files/folders in node_modules folder and the folder itself
 node_modules/
+.env
