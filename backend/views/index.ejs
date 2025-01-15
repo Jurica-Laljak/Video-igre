@@ -17,7 +17,7 @@
   <header>
     <h1>Opis</h1>
     <div class="flex-right">
-      <% if(isAuthenticated){ %>
+      <% if(sessionExists && isAuthenticated){ %>
         <div class="button-container">
           <a href="http://localhost:5173/user" class="button" id="user">Korisnički profil</a>
         </div>
@@ -25,11 +25,11 @@
           <a class="button" id="refresh">Osvježi preslike</a>
         </div>
         <div class="button-container">
-          <a class="button">Odjava</a>
+          <a href="http://localhost:5173/session-logout" class="button">Odjava</a>
         </div>
         <% } else{ %>
           <div class="button-container">
-            <a href="http://localhost:5173/login" class="button">Prijava</a>
+            <a href="http://localhost:5173/session-login" class="button">Prijava</a>
           </div>
           <% } %>
     </div>

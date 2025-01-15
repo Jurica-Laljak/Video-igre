@@ -1,5 +1,6 @@
 const express = require("express")
 const api = require("./routes/api")
+const session = require('express-session')
 require('dotenv').config()
 
 const fs = require("node:fs")
@@ -11,6 +12,14 @@ const Envelope = require('./data/schemas/envelope')
 const routeMap = require('./data/routeMap')
 
 const app = express()
+//session implementation:
+app.use(session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false
+}))
+
+var sessionIdGenerator = 0
 
 //auth0 implmentation:
 const { auth } = require('express-openid-connect')
@@ -18,10 +27,11 @@ const { requiresAuth } = require('express-openid-connect')
 const config = {
         authRequired: false,
         auth0Logout: true,
-        secret: process.env.SECRET,
+        secret: process.env.AUTH0_SECRET,
         baseURL: 'http://localhost:5173',
         clientID: 'x8mMh6O5xViZanDofGspgchKMMdzHc1E',
-        issuerBaseURL: 'https://dev-vfswr3lxm2ldbqqa.eu.auth0.com'
+        issuerBaseURL: 'https://dev-vfswr3lxm2ldbqqa.eu.auth0.com',
+        authorizationParams: {}
 }
 app.use(auth(config))
 
@@ -65,16 +75,66 @@ app.use((req, res, next) => {
 
 app.use(express.json())   //json response writer middleware
 
+//Session endpoints:
+app.get('/session-login', (req, res) => {
+        if (!req.session.user) {
+                req.session.user = { id: sessionIdGenerator }
+                sessionIdGenerator += 1
+                console.log("Created user with id:", req.session.user.id)
+        } else {
+                console.log("Hello", req.session.user.id)
+        }
+        if (!req.oidc.isAuthenticated()) {
+                console.log("User", req.session.user.id, "isn't Auth0 authenticated, redirecting")
+                res.redirect("/login")
+        } else {
+                console.log("User", req.session.user.id, "is Auth0 authenticated")
+                res.redirect("/")
+        }
+})
+
+app.get('/session-logout', (req, res) => {
+        if (!req.session.user) {
+                console.log("Can't logout nonexistent user")
+        } else {
+                req.session.destroy((err) => {
+                        if (err) {
+                                console.error(err);
+                        } else {
+                                console.log("Successfully logged out user")
+                                res.redirect("/")
+                        }
+                })
+        }
+})
+
+//Auth0 protected endpoints:
 app.get('/', (req, res) => {
+        if (!req.session.user) {
+                sessionExists = false
+        } else {
+                sessionExists = true
+        }
         isAuthenticated = req.oidc.isAuthenticated()
-        res.render('index', { isAuthenticated })
+        res.render('index', { sessionExists, isAuthenticated })
 })
 
-app.get('/user', requiresAuth(), (req, res) => {
-        var userData = req.oidc.user
-        res.render('user', { userData })
+app.get('/user', (req, res, next) => {
+        if (!req.session.user || !req.oidc.isAuthenticated()) {
+                try {
+                        throw new Error("User not authenicated")
+                } catch(err) {
+                        res.locals.errstatus = "Unauthorized"
+                        res.locals.errstatusCode = 401
+                        next(err)
+                }
+        } else {
+                var userData = req.oidc.user
+                res.render('user', { userData })
+        }
 })
 
+//
 app.get("/video-igre.csv", (req, res) => {
         res.download("../video-igre.csv")
 })
