@@ -4,12 +4,14 @@ const session = require('express-session')
 require('dotenv').config()
 
 const fs = require("node:fs")
+const path = require('path')
 const db = require("./database/database")
 const queryHeader = require("./database/queryHeader")
 const queryFooter = require("./database/queryFooter")
 const rows = require("./data/rows")
 const Envelope = require('./data/schemas/envelope')
 const routeMap = require('./data/routeMap')
+const refreshImage = require('./refreshImage')
 
 const app = express()
 //session implementation:
@@ -38,40 +40,6 @@ app.use(auth(config))
 app.set('view engine', 'ejs')
 
 app.use(express.static("../frontend"))  //static delivery middleware
-/*
-app.use((req, res, next) => {
-        var responseEnvelope = {}
-        var route = req.url.split("/v1/")[1]
-        if (!route) {
-                responseEnvelope.status = "Bad Request"
-                responseEnvelope.message = req.url + " nije validna putanja"
-                responseEnvelope.response = null
-                res.status(400).json(responseEnvelope)
-        }
-        let matchResults = []
-        Object.keys(routeMap).forEach((key) => {
-                if (route.includes(key)) {
-                        matchResults.push(key)
-                }
-        })
-        matchResults.sort((a, b) => b.length - a.length)        //sort descending by length
-        route = matchResults[0]
-
-        if (!routeMap[route]) {
-                responseEnvelope.status = "Bad Request"
-                responseEnvelope.message = req.url + " nije validna putanja"
-                responseEnvelope.response = null
-                res.status(400).json(responseEnvelope)
-        } else if (!routeMap[route].includes(req.method)) {
-                        responseEnvelope.status = "Method Not Allowed"
-                        responseEnvelope.message = "Nad " + req.url + " nije dozovljena metoda " + req.method
-                        responseEnvelope.response = { "allowedMethods": routeMap[route] }
-                        res.status(405).json(responseEnvelope)
-        } else {
-                next()
-        }
-})
-*/
 
 app.use(express.json())   //json response writer middleware
 
@@ -119,29 +87,68 @@ app.get('/', (req, res) => {
         res.render('index', { sessionExists, isAuthenticated })
 })
 
-app.get('/user', (req, res, next) => {
-        if (!req.session.user || !req.oidc.isAuthenticated()) {
-                try {
-                        throw new Error("User not authenicated")
-                } catch(err) {
-                        res.locals.errstatus = "Unauthorized"
-                        res.locals.errstatusCode = 401
-                        next(err)
-                }
+app.get('/user', (req, res) => {
+        if (!req.session.user || !req.oidc.isAuthenticated()) { //user unauthenticated
+                res.redirect('/session-login')
         } else {
                 var userData = req.oidc.user
                 res.render('user', { userData })
         }
 })
 
-//
-app.get("/video-igre.csv", (req, res) => {
-        res.download("../video-igre.csv")
+app.get('/refresh', async (req, res) => {
+        if (!req.session.user || !req.oidc.isAuthenticated()) { //user unauthenticated
+                res.redirect('/session-login')
+        } else {
+                await refreshImage(req.oidc.user.sub)
+                res.redirect("/")
+        }
 })
 
-app.get("/video-igre-formatted.json", (req, res) => {
-        res.download("../video-igre-formatted.json")
+//Paths for serving user-dependent content:
+app.get("/video-igre.csv", (req, res) => {
+        if (!req.oidc.isAuthenticated() || !req.session.user) {      //user not authenticated
+                res.download("../backend/cache/video-igre.csv")
+        } else {
+                var userId = req.oidc.user.sub.split('|')[1]
+                var folderPath = path.join(__dirname, "cache", userId)
+                var filePath = path.join(folderPath, "video-igre.csv")
+                try { 
+                        if (fs.existsSync(folderPath) && fs.existsSync(filePath)) {
+                                res.download(filePath)
+                        } else {        //user doesn't have custom image
+                                res.download("../backend/cache/video-igre.csv")
+                        }
+                } catch (err) {
+                        console.log(err)
+                }
+        }
+
 })
+
+app.get("/video-igre.json", (req, res) => {
+        if (!req.oidc.isAuthenticated()) {      //user not authenticated
+                res.download("../backend/cache/video-igre.json")
+        } else {
+                var userId = req.oidc.user.sub.split('|')[1]
+                var folderPath = path.join(__dirname, "cache", userId)
+                var filePath = path.join(folderPath, "video-igre.json")
+                try { 
+                        if (fs.existsSync(folderPath) && fs.existsSync(filePath)) {
+                                res.download(filePath)
+                        } else {        //user doesn't have custom image
+                                res.download("../backend/cache/video-igre.json")
+                        }
+                } catch (err) {
+                        console.log(err)
+                }
+        }
+})
+
+
+
+
+
 
 let queryStorage = ""
 
@@ -310,6 +317,39 @@ app.get("/download/json", async (req, res) => {
 
         res.download("video-igre-filtered.json")
 })
+
+/* app.use((req, res, next) => {
+        var responseEnvelope = {}
+        var route = req.url.split("/v1/")[1]
+        if (!route) {
+                responseEnvelope.status = "Bad Request"
+                responseEnvelope.message = req.url + " nije validna putanja"
+                responseEnvelope.response = null
+                res.status(400).json(responseEnvelope)
+        }
+        let matchResults = []
+        Object.keys(routeMap).forEach((key) => {
+                if (route.includes(key)) {
+                        matchResults.push(key)
+                }
+        })
+        matchResults.sort((a, b) => b.length - a.length)        //sort descending by length
+        route = matchResults[0]
+
+        if (!routeMap[route]) {
+                responseEnvelope.status = "Bad Request"
+                responseEnvelope.message = req.url + " nije validna putanja"
+                responseEnvelope.response = null
+                res.status(400).json(responseEnvelope)
+        } else if (!routeMap[route].includes(req.method)) {
+                        responseEnvelope.status = "Method Not Allowed"
+                        responseEnvelope.message = "Nad " + req.url + " nije dozovljena metoda " + req.method
+                        responseEnvelope.response = { "allowedMethods": routeMap[route] }
+                        res.status(405).json(responseEnvelope)
+        } else {
+                next()
+        }
+}) */
 
 //api router
 app.use('/api/v1', api)
