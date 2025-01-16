@@ -16,7 +16,7 @@ const refreshImage = require('./refreshImage')
 const app = express()
 //session implementation:
 app.use(session({
-        secret: process.env.SESSION_SECRET,
+        secret: "ZgMbOxwHK9wquPhXpnk2FKKdND1XHThRSi4UbMCpF20ujhLk5uSdte",
         resave: false,
         saveUninitialized: false
 }))
@@ -29,7 +29,7 @@ const { requiresAuth } = require('express-openid-connect')
 const config = {
         authRequired: false,
         auth0Logout: true,
-        secret: process.env.AUTH0_SECRET,
+        secret: "ekHs9MiC8gVgf0mHYy3d9sbBgBf5OEi9nuKZ2h6lSnLUuDK4OvUYlQ",
         baseURL: 'http://localhost:5173',
         clientID: 'x8mMh6O5xViZanDofGspgchKMMdzHc1E',
         issuerBaseURL: 'https://dev-vfswr3lxm2ldbqqa.eu.auth0.com',
