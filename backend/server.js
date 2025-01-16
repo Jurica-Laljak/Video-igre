@@ -39,6 +39,40 @@ app.use(auth(config))
 
 app.set('view engine', 'ejs')
 
+app.use((req, res, next) => {
+        var responseEnvelope = {}
+        var route = req.url
+        //var route = req.url.split("/v1/")[1]
+        if (!route) {
+                responseEnvelope.status = "Bad Request"
+                responseEnvelope.message = req.url + " nije validna putanja"
+                responseEnvelope.response = null
+                res.status(400).json(responseEnvelope)
+        }
+        let matchResults = []
+        Object.keys(routeMap).forEach((key) => {
+                if (route.includes(key)) {
+                        matchResults.push(key)
+                }
+        })
+        matchResults.sort((a, b) => b.length - a.length)        //sort descending by length
+        route = matchResults[0]
+      
+        if (!routeMap[route]) {
+                responseEnvelope.status = "Bad Request"
+                responseEnvelope.message = req.url + " nije validna putanja"
+                responseEnvelope.response = null
+                res.status(400).json(responseEnvelope)
+        } else if (!routeMap[route].includes(req.method)) {
+                        responseEnvelope.status = "Method Not Allowed"
+                        responseEnvelope.message = "Nad " + req.url + " nije dozovljena metoda " + req.method
+                        responseEnvelope.response = { "allowedMethods": routeMap[route] }
+                        res.status(405).json(responseEnvelope)
+        } else {
+                next()
+        }
+})
+
 app.use(express.static("../frontend"))  //static delivery middleware
 
 app.use(express.json())   //json response writer middleware
@@ -48,28 +82,30 @@ app.get('/session-login', (req, res) => {
         if (!req.session.user) {
                 req.session.user = { id: sessionIdGenerator }
                 sessionIdGenerator += 1
-                console.log("Created user with id:", req.session.user.id)
+                //console.log("Created user with id:", req.session.user.id)
         } else {
-                console.log("Hello", req.session.user.id)
+                //console.log("Hello", req.session.user.id)
+                res.redirect("/")
         }
         if (!req.oidc.isAuthenticated()) {
-                console.log("User", req.session.user.id, "isn't Auth0 authenticated, redirecting")
+                //console.log("User", req.session.user.id, "isn't Auth0 authenticated, redirecting")
                 res.redirect("/login")
         } else {
-                console.log("User", req.session.user.id, "is Auth0 authenticated")
+                //console.log("User", req.session.user.id, "is Auth0 authenticated")
                 res.redirect("/")
         }
 })
 
 app.get('/session-logout', (req, res) => {
         if (!req.session.user) {
-                console.log("Can't logout nonexistent user")
+                //console.log("Can't logout nonexistent user")
+                res.redirect("/")
         } else {
                 req.session.destroy((err) => {
                         if (err) {
                                 console.error(err);
                         } else {
-                                console.log("Successfully logged out user")
+                                //console.log("Successfully logged out user")
                                 res.redirect("/")
                         }
                 })
@@ -317,39 +353,6 @@ app.get("/download/json", async (req, res) => {
 
         res.download("video-igre-filtered.json")
 })
-
-/* app.use((req, res, next) => {
-        var responseEnvelope = {}
-        var route = req.url.split("/v1/")[1]
-        if (!route) {
-                responseEnvelope.status = "Bad Request"
-                responseEnvelope.message = req.url + " nije validna putanja"
-                responseEnvelope.response = null
-                res.status(400).json(responseEnvelope)
-        }
-        let matchResults = []
-        Object.keys(routeMap).forEach((key) => {
-                if (route.includes(key)) {
-                        matchResults.push(key)
-                }
-        })
-        matchResults.sort((a, b) => b.length - a.length)        //sort descending by length
-        route = matchResults[0]
-
-        if (!routeMap[route]) {
-                responseEnvelope.status = "Bad Request"
-                responseEnvelope.message = req.url + " nije validna putanja"
-                responseEnvelope.response = null
-                res.status(400).json(responseEnvelope)
-        } else if (!routeMap[route].includes(req.method)) {
-                        responseEnvelope.status = "Method Not Allowed"
-                        responseEnvelope.message = "Nad " + req.url + " nije dozovljena metoda " + req.method
-                        responseEnvelope.response = { "allowedMethods": routeMap[route] }
-                        res.status(405).json(responseEnvelope)
-        } else {
-                next()
-        }
-}) */
 
 //api router
 app.use('/api/v1', api)
